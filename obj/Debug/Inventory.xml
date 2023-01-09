@@ -1,0 +1,241 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Inventory
+</name>
+</assembly>
+<members>
+<member name="T:Inventory.Dataset1.VIEWPURCHASEREGISTERSUMMARYDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Inventory.Dataset1.Inv_view_Pending_IndentDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Inventory.Dataset1.ISSUEDETAILSDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Inventory.Dataset1.issuesummaryDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Inventory.Dataset1.INV_VIEW_INPUTTAXDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Inventory.Dataset1.STOCKISSUEDETAILDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Inventory.Dataset1.STOCKSUMMARYDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Inventory.Dataset1.ISSUEREGISTERDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Inventory.Dataset1.VIEWSTOCKADJUSTMENTDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Inventory.Dataset1.VIEWSTOCKREGISTERDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Inventory.Dataset1.Inv_view_Pending_PurDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Inventory.Dataset1.INVENTORYITEMMASTERDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Inventory.Dataset1.PO_VIEW_VENDORMASTERDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Inventory.Dataset1.INV_PENDING_PURCHASEDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Inventory.Dataset1.VIEW_FOCREPORTDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Inventory.Dataset1.Inv_ExiseRptDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Inventory.Dataset1.VIEWPURCHASEREGISTERSUMMARYRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Inventory.Dataset1.Inv_view_Pending_IndentRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Inventory.Dataset1.ISSUEDETAILSRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Inventory.Dataset1.issuesummaryRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Inventory.Dataset1.INV_VIEW_INPUTTAXRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Inventory.Dataset1.STOCKISSUEDETAILRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Inventory.Dataset1.STOCKSUMMARYRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Inventory.Dataset1.ISSUEREGISTERRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Inventory.Dataset1.VIEWSTOCKADJUSTMENTRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Inventory.Dataset1.VIEWSTOCKREGISTERRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Inventory.Dataset1.Inv_view_Pending_PurRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Inventory.Dataset1.INVENTORYITEMMASTERRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Inventory.Dataset1.PO_VIEW_VENDORMASTERRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Inventory.Dataset1.INV_PENDING_PURCHASERow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Inventory.Dataset1.VIEW_FOCREPORTRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Inventory.Dataset1.Inv_ExiseRptRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Inventory.Dataset1.VIEWPURCHASEREGISTERSUMMARYRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Inventory.Dataset1.Inv_view_Pending_IndentRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Inventory.Dataset1.ISSUEDETAILSRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Inventory.Dataset1.issuesummaryRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Inventory.Dataset1.INV_VIEW_INPUTTAXRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Inventory.Dataset1.STOCKISSUEDETAILRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Inventory.Dataset1.STOCKSUMMARYRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Inventory.Dataset1.ISSUEREGISTERRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Inventory.Dataset1.VIEWSTOCKADJUSTMENTRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Inventory.Dataset1.VIEWSTOCKREGISTERRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Inventory.Dataset1.Inv_view_Pending_PurRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Inventory.Dataset1.INVENTORYITEMMASTERRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Inventory.Dataset1.PO_VIEW_VENDORMASTERRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Inventory.Dataset1.INV_PENDING_PURCHASERowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Inventory.Dataset1.VIEW_FOCREPORTRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Inventory.Dataset1.Inv_ExiseRptRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Inventory.Dataset1">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="T:Inventory.Dataset1TableAdapters.VIEWPURCHASEREGISTERSUMMARYTableAdapter">
+	<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member><member name="M:Inventory.frmStocktransferreport.FillStorename">
+******************************  To fill POS details from SupplierName  *******************************'''
+
+</member><member name="M:Inventory.Issue_Register.FillGroupdetails">
+******************************  To fill GROUP DETAILS *******************************'''
+
+</member><member name="M:Inventory.Issue_Register.FillStorename">
+******************************  To fill POS details from SupplierName  *******************************'''
+
+</member><member name="M:Inventory.frmStockadjustmentreport.FillStorename">
+******************************  To fill POS details from SupplierName  *******************************'''
+
+</member><member name="M:Inventory.Indent_Register.FillGroupdetails">
+******************************  To fill GROUP DETAILS *******************************'''
+
+</member><member name="M:Inventory.Indent_Register.FillStorename">
+******************************  To fill POS details from SupplierName  *******************************'''
+
+</member><member name="M:Inventory.Itemwise_Issue_details.FillStorename">
+******************************  To fill POS details from SupplierName  *******************************'''
+
+</member><member name="M:Inventory.PendingIndent.FillStorename">
+******************************  To fill POS details from SupplierName  *******************************'''
+
+</member><member name="M:Inventory.frmStockreturnreport.FillStorename">
+******************************  To fill POS details from SupplierName  *******************************'''
+
+</member><member name="M:Inventory.dailyisueDetails.FillStorename">
+******************************  To fill POS details from SupplierName  *******************************'''
+
+</member>
+</members>
+</doc>

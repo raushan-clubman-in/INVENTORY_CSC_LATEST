@@ -1,0 +1,852 @@
+Imports System.IO
+Imports System.Data.SqlClient
+Public Class frmWaitItemCode
+    Inherits System.Windows.Forms.Form
+
+#Region " Windows Form Designer generated code "
+
+    Public Sub New()
+        MyBase.New()
+
+        'This call is required by the Windows Form Designer.
+        InitializeComponent()
+
+        'Add any initialization after the InitializeComponent() call
+
+    End Sub
+
+    'Form overrides dispose to clean up the component list.
+    Protected Overloads Overrides Sub Dispose(ByVal disposing As Boolean)
+        If disposing Then
+            If Not (components Is Nothing) Then
+                components.Dispose()
+            End If
+        End If
+        MyBase.Dispose(disposing)
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    Friend WithEvents CHK_POS As System.Windows.Forms.CheckBox
+    Friend WithEvents CHK_ADJ As System.Windows.Forms.CheckBox
+    Friend WithEvents CHK_TFR As System.Windows.Forms.CheckBox
+    Friend WithEvents chk_issue As System.Windows.Forms.CheckBox
+    Friend WithEvents PBAR As System.Windows.Forms.ProgressBar
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents lbl_KOTdate As System.Windows.Forms.Label
+    Friend WithEvents cmd_exit As System.Windows.Forms.Button
+    Friend WithEvents Cmd_UPDATE As System.Windows.Forms.Button
+    Friend WithEvents dtp_TOdate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtp_FROMdate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents txt_itemcode As System.Windows.Forms.TextBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
+        Dim resources As System.Resources.ResourceManager = New System.Resources.ResourceManager(GetType(frmWaitItemCode))
+        Me.CHK_POS = New System.Windows.Forms.CheckBox
+        Me.CHK_ADJ = New System.Windows.Forms.CheckBox
+        Me.CHK_TFR = New System.Windows.Forms.CheckBox
+        Me.chk_issue = New System.Windows.Forms.CheckBox
+        Me.PBAR = New System.Windows.Forms.ProgressBar
+        Me.Label1 = New System.Windows.Forms.Label
+        Me.lbl_KOTdate = New System.Windows.Forms.Label
+        Me.cmd_exit = New System.Windows.Forms.Button
+        Me.Cmd_UPDATE = New System.Windows.Forms.Button
+        Me.dtp_TOdate = New System.Windows.Forms.DateTimePicker
+        Me.dtp_FROMdate = New System.Windows.Forms.DateTimePicker
+        Me.txt_itemcode = New System.Windows.Forms.TextBox
+        Me.Label2 = New System.Windows.Forms.Label
+        Me.SuspendLayout()
+        '
+        'CHK_POS
+        '
+        Me.CHK_POS.Location = New System.Drawing.Point(328, 99)
+        Me.CHK_POS.Name = "CHK_POS"
+        Me.CHK_POS.Size = New System.Drawing.Size(64, 24)
+        Me.CHK_POS.TabIndex = 373
+        Me.CHK_POS.Text = "POS"
+        Me.CHK_POS.Visible = False
+        '
+        'CHK_ADJ
+        '
+        Me.CHK_ADJ.Location = New System.Drawing.Point(256, 99)
+        Me.CHK_ADJ.Name = "CHK_ADJ"
+        Me.CHK_ADJ.Size = New System.Drawing.Size(64, 24)
+        Me.CHK_ADJ.TabIndex = 372
+        Me.CHK_ADJ.Text = "ADJ"
+        Me.CHK_ADJ.Visible = False
+        '
+        'CHK_TFR
+        '
+        Me.CHK_TFR.Location = New System.Drawing.Point(144, 99)
+        Me.CHK_TFR.Name = "CHK_TFR"
+        Me.CHK_TFR.Size = New System.Drawing.Size(64, 24)
+        Me.CHK_TFR.TabIndex = 371
+        Me.CHK_TFR.Text = "TFR"
+        '
+        'chk_issue
+        '
+        Me.chk_issue.Location = New System.Drawing.Point(56, 99)
+        Me.chk_issue.Name = "chk_issue"
+        Me.chk_issue.Size = New System.Drawing.Size(64, 24)
+        Me.chk_issue.TabIndex = 370
+        Me.chk_issue.Text = "ISSUE"
+        '
+        'PBAR
+        '
+        Me.PBAR.Location = New System.Drawing.Point(48, 160)
+        Me.PBAR.Name = "PBAR"
+        Me.PBAR.Size = New System.Drawing.Size(344, 24)
+        Me.PBAR.Step = 1
+        Me.PBAR.TabIndex = 369
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.Font = New System.Drawing.Font("Courier New", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(48, 51)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(160, 25)
+        Me.Label1.TabIndex = 368
+        Me.Label1.Text = "TO DATE     :"
+        '
+        'lbl_KOTdate
+        '
+        Me.lbl_KOTdate.AutoSize = True
+        Me.lbl_KOTdate.BackColor = System.Drawing.Color.Transparent
+        Me.lbl_KOTdate.Font = New System.Drawing.Font("Courier New", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_KOTdate.Location = New System.Drawing.Point(48, 11)
+        Me.lbl_KOTdate.Name = "lbl_KOTdate"
+        Me.lbl_KOTdate.Size = New System.Drawing.Size(160, 25)
+        Me.lbl_KOTdate.TabIndex = 367
+        Me.lbl_KOTdate.Text = "FROM DATE   :"
+        '
+        'cmd_exit
+        '
+        Me.cmd_exit.BackColor = System.Drawing.Color.ForestGreen
+        Me.cmd_exit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.cmd_exit.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmd_exit.ForeColor = System.Drawing.Color.White
+        Me.cmd_exit.Image = CType(resources.GetObject("cmd_exit.Image"), System.Drawing.Image)
+        Me.cmd_exit.Location = New System.Drawing.Point(232, 200)
+        Me.cmd_exit.Name = "cmd_exit"
+        Me.cmd_exit.Size = New System.Drawing.Size(104, 32)
+        Me.cmd_exit.TabIndex = 366
+        Me.cmd_exit.Text = "EXIT"
+        '
+        'Cmd_UPDATE
+        '
+        Me.Cmd_UPDATE.BackColor = System.Drawing.Color.ForestGreen
+        Me.Cmd_UPDATE.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Cmd_UPDATE.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Cmd_UPDATE.ForeColor = System.Drawing.Color.White
+        Me.Cmd_UPDATE.Image = CType(resources.GetObject("Cmd_UPDATE.Image"), System.Drawing.Image)
+        Me.Cmd_UPDATE.Location = New System.Drawing.Point(104, 200)
+        Me.Cmd_UPDATE.Name = "Cmd_UPDATE"
+        Me.Cmd_UPDATE.Size = New System.Drawing.Size(104, 32)
+        Me.Cmd_UPDATE.TabIndex = 365
+        Me.Cmd_UPDATE.Text = "UPDATE"
+        '
+        'dtp_TOdate
+        '
+        Me.dtp_TOdate.CustomFormat = "dd/MM/yyyy"
+        Me.dtp_TOdate.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtp_TOdate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtp_TOdate.Location = New System.Drawing.Point(232, 51)
+        Me.dtp_TOdate.Name = "dtp_TOdate"
+        Me.dtp_TOdate.Size = New System.Drawing.Size(136, 26)
+        Me.dtp_TOdate.TabIndex = 364
+        '
+        'dtp_FROMdate
+        '
+        Me.dtp_FROMdate.CustomFormat = "dd/MM/yyyy"
+        Me.dtp_FROMdate.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtp_FROMdate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtp_FROMdate.Location = New System.Drawing.Point(232, 11)
+        Me.dtp_FROMdate.Name = "dtp_FROMdate"
+        Me.dtp_FROMdate.Size = New System.Drawing.Size(136, 26)
+        Me.dtp_FROMdate.TabIndex = 363
+        '
+        'txt_itemcode
+        '
+        Me.txt_itemcode.BackColor = System.Drawing.Color.Wheat
+        Me.txt_itemcode.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txt_itemcode.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_itemcode.Location = New System.Drawing.Point(160, 128)
+        Me.txt_itemcode.MaxLength = 10
+        Me.txt_itemcode.Name = "txt_itemcode"
+        Me.txt_itemcode.Size = New System.Drawing.Size(144, 23)
+        Me.txt_itemcode.TabIndex = 374
+        Me.txt_itemcode.Text = ""
+        '
+        'Label2
+        '
+        Me.Label2.AllowDrop = True
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Font = New System.Drawing.Font("Century", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Black
+        Me.Label2.Location = New System.Drawing.Point(48, 128)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(103, 16)
+        Me.Label2.TabIndex = 375
+        Me.Label2.Text = "Item Code :"
+        '
+        'frmWaitItemCode
+        '
+        Me.AutoScaleBaseSize = New System.Drawing.Size(5, 13)
+        Me.BackColor = System.Drawing.Color.Aqua
+        Me.ClientSize = New System.Drawing.Size(440, 238)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.txt_itemcode)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lbl_KOTdate)
+        Me.Controls.Add(Me.CHK_POS)
+        Me.Controls.Add(Me.CHK_ADJ)
+        Me.Controls.Add(Me.CHK_TFR)
+        Me.Controls.Add(Me.chk_issue)
+        Me.Controls.Add(Me.PBAR)
+        Me.Controls.Add(Me.cmd_exit)
+        Me.Controls.Add(Me.Cmd_UPDATE)
+        Me.Controls.Add(Me.dtp_TOdate)
+        Me.Controls.Add(Me.dtp_FROMdate)
+        Me.Name = "frmWaitItemCode"
+        Me.Text = "frmWaitItemCode"
+        Me.ResumeLayout(False)
+
+    End Sub
+
+#End Region
+    Dim gconnection As New GlobalClass
+    Private Sub Cmd_UPDATE_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cmd_UPDATE.Click
+        Dim Opquantity, Opamount, Grnquantity, Grnamount As Double
+        Dim Calquantity, Issuequantity, Issueamount, PURCHASERATE As Double
+        Dim transferqty, transferamount As Double
+        Dim adjustqty, adjustamount As Double
+        Dim Calrate, Clsquantity As Double
+        Dim sqlstring As String
+        Dim INSERT(0) As String
+        Dim opRate, grnRate, IssRate As Double
+
+        Me.Cursor = Cursors.WaitCursor
+
+        'sqlstring = "exec Cp_WeightedAverage '" & Format(dtp_FROMdate.Value, "dd-MMM-yyyy") & "','" & Format(dtp_TOdate.Value, "dd-MMM-yyyy") & "'"
+        'gconnection.getDataSet(sqlstring, "Cp_WeightedAverage")
+
+        Me.Cursor = Cursors.Default
+
+        Dim mm As Integer = 0
+        If mm = 0 Then
+            Dim i As Integer
+            Dim dr As DataRow
+            'If chk_issue.Checked = True Then
+            '    sqlstring = "SELECT * FROM STOCKISSUEDETAIL WHERE ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME) BETWEEN '" & Format(dtp_FROMdate.Value, "dd-MMM-yyyy") & "' AND '" & Format(dtp_TOdate.Value, "dd-MMM-yyyy") & "' ORDER BY AUTOID"
+            '    gconnection.getDataSet(sqlstring, "ISSUE")
+            '    If gdataset.Tables.Contains("ISSUE") Then
+            '        If gdataset.Tables("ISSUE").Rows.Count > 0 Then
+            '            PBAR.Maximum = gdataset.Tables("ISSUE").Rows.Count
+            '            PBAR.Value = 0
+            '            For Each dr In gdataset.Tables("ISSUE").Rows
+            '                sqlstring = "SELECT ISNULL(PURCHASERATE,0) AS PURCHASERATE,ISNULL(OPSTOCK,0) AS OPSTOCK,ISNULL(OPVALUE,0) AS OPVALUE FROM INVENTORYITEMMASTER WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND STORECODE='MNS'"
+            '                gconnection.getDataSet(sqlstring, "INVENTORYITEM")
+            '                If gdataset.Tables("INVENTORYITEM").Rows.Count > 0 Then
+            '                    Opquantity = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("OPSTOCK")), "0.000")
+            '                    Opamount = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("OPVALUE")), "0.00")
+            '                    PURCHASERATE = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("PURCHASERATE")), "0.00")
+            '                Else
+            '                    Opquantity = 0
+            '                    Opamount = 0
+            '                    PURCHASERATE = 0
+            '                End If
+
+            '                sqlstring = "SELECT ISNULL(SUM(QTY),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM GRN_DETAILS WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOIDITEM,'') <>'Y' AND CAST(CONVERT(VARCHAR(11),GRNDATE,6) AS DATETIME)<='" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+            '                gconnection.getDataSet(sqlstring, "GRN_DETAILS")
+            '                If gdataset.Tables("GRN_DETAILS").Rows.Count > 0 Then
+            '                    Grnquantity = Format(Val(gdataset.Tables("GRN_DETAILS").Rows(0).Item("QTY")), "0.000")
+            '                    Grnamount = Format(Val(gdataset.Tables("GRN_DETAILS").Rows(0).Item("AMOUNT")), "0.00")
+            '                Else
+            '                    Grnquantity = 0
+            '                    Grnamount = 0
+            '                End If
+
+            '                sqlstring = "SELECT ISNULL(SUM(QTY),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM STOCKISSUEDETAIL WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+            '                gconnection.getDataSet(sqlstring, "STOCKISSUEDETAIL")
+            '                If gdataset.Tables("STOCKISSUEDETAIL").Rows.Count > 0 Then
+            '                    Issuequantity = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("Qty")), "0.000")
+            '                    Issueamount = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("AMOUNT")), "0.00")
+            '                Else
+            '                    Issuequantity = 0
+            '                    Issueamount = 0
+            '                End If
+
+            '                sqlstring = "SELECT ISNULL(SUM(ADJUSTEDSTOCK),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM STOCKADJUSTDETAILS WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+            '                gconnection.getDataSet(sqlstring, "STOCKADJUSTDETAILS")
+            '                If gdataset.Tables("STOCKADJUSTDETAILS").Rows.Count > 0 Then
+            '                    adjustqty = Format(Val(gdataset.Tables("STOCKADJUSTDETAILS").Rows(0).Item("Qty")), "0.000")
+            '                    adjustamount = Format(Val(gdataset.Tables("STOCKADJUSTDETAILS").Rows(0).Item("AMOUNT")), "0.00")
+            '                Else
+            '                    adjustqty = 0
+            '                    adjustamount = 0
+            '                End If
+
+            '                sqlstring = "SELECT ISNULL(SUM(QTY),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM STOCKtransferDETAIL WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' and doctype='RET' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+            '                gconnection.getDataSet(sqlstring, "STOCKtransferDETAIL")
+            '                If gdataset.Tables("STOCKISSUEDETAIL").Rows.Count > 0 Then
+            '                    transferqty = Format(Val(gdataset.Tables("STOCKtransferDETAIL").Rows(0).Item("Qty")), "0.000")
+            '                    transferamount = Format(Val(gdataset.Tables("STOCKtransferDETAIL").Rows(0).Item("AMOUNT")), "0.00")
+            '                Else
+            '                    transferqty = 0
+            '                    transferamount = 0
+            '                End If
+            '                '                    Clsquantity = (Val(Opquantity) + Val(Grnquantity) + Val(adjustqty) - Val(Issuequantity) + Val(transferqty))
+
+            '                Clsquantity = (Val(Opquantity) + Val(Grnquantity))
+
+            '                If Clsquantity <= 0 Then
+            '                    If Grnquantity <> 0 Then
+            '                        Calrate = Val(Grnamount) / Val(Grnquantity)
+            '                    ElseIf Issuequantity <> 0 Then
+            '                        sqlstring = "SELECT TOP 1 ISNULL(RATE,0) RATE FROM STOCKISSUEDETAIL WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+            '                        gconnection.getDataSet(sqlstring, "STOCKISSUEDETAIL")
+            '                        If gdataset.Tables("STOCKISSUEDETAIL").Rows.Count > 0 Then
+            '                            Calrate = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("RATE")), "0.00")
+            '                        End If
+            '                    Else
+            '                        sqlstring = "SELECT ISNULL(PURCHASERATE,0) PURCHASERATE FROM INVENTORYITEMMASTER WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND STORECODE='MNS'"
+            '                        gconnection.getDataSet(sqlstring, "INVENTORYITEM")
+            '                        If gdataset.Tables("INVENTORYITEM").Rows.Count > 0 Then
+            '                            Calrate = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("PURCHASERATE")), "0.00")
+            '                            If Calrate <= 0 Then
+            '                                Calrate = (Val(Opamount) + Val(Grnamount)) / (Val(Clsquantity))
+            '                            End If
+            '                        End If
+            '                    End If
+            '                Else
+            '                    Calrate = (Val(Opamount) + Val(Grnamount)) / (Val(Clsquantity))
+            '                End If
+
+
+            '                sqlstring = "UPDATE STOCKISSUEDETAIL SET RATE=" & Calrate & " WHERE AUTOID=" & dr("AUTOID")
+            '                ReDim Preserve INSERT(INSERT.Length)
+            '                INSERT(INSERT.Length - 1) = sqlstring
+            '                PBAR.Value = PBAR.Value + 1
+            '            Next
+            '            sqlstring = "UPDATE STOCKISSUEDETAIL SET AMOUNT=QTY*RATE WHERE CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME) BETWEEN '" & Format(dtp_FROMdate.Value, "dd-MMM-yyyy") & "' AND '" & Format(dtp_TOdate.Value, "dd-MMM-yyyy") & "'"
+            '            ReDim Preserve INSERT(INSERT.Length)
+            '            INSERT(INSERT.Length - 1) = sqlstring
+            '        End If
+            '    End If
+            '    PBAR.Value = 0
+            'End If
+            If chk_issue.Checked = True Then
+                Dim Count As Integer
+                Dim UpOpQty, UpOpVal, UpGrnQty, UpGrnVal, UpIssQty, UpIssVal, UpTrnQty, UpTrnVal, UpAdjQty, UpAdjVal, UpComQty, UpComVal As Double
+                Dim UpOpRate, UpGrnRate, UpIssRate, UpTrnRate, UpAdjRate, UpComRate As Double
+                sqlstring = "SELECT * FROM STOCKISSUEDETAIL WHERE ISNULL(VOID,'')<>'Y' AND ITEMCODE = '" & Trim(txt_itemcode.Text) & "' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME) BETWEEN '" & Format(dtp_FROMdate.Value, "dd-MMM-yyyy") & "' AND '" & Format(dtp_TOdate.Value, "dd-MMM-yyyy") & "' ORDER BY AUTOID"
+                gconnection.getDataSet(sqlstring, "ISSUE")
+                If gdataset.Tables.Contains("ISSUE") Then
+                    If gdataset.Tables("ISSUE").Rows.Count > 0 Then
+                        PBAR.Maximum = gdataset.Tables("ISSUE").Rows.Count
+                        PBAR.Value = 0
+                        For Each dr In gdataset.Tables("ISSUE").Rows
+                            sqlstring = "SELECT ISNULL(PURCHASERATE,0) AS PURCHASERATE,ISNULL(OPSTOCK,0) AS OPSTOCK,ISNULL(OPVALUE,0) AS OPVALUE FROM INVENTORYITEMMASTER WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND STORECODE='MNS'"
+                            gconnection.getDataSet(sqlstring, "INVENTORYITEM")
+                            If gdataset.Tables("INVENTORYITEM").Rows.Count > 0 Then
+                                Opquantity = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("OPSTOCK")), "0.000")
+                                Opamount = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("OPVALUE")), "0.00")
+                                PURCHASERATE = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("PURCHASERATE")), "0.00")
+                                UpOpQty = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("OPSTOCK")), "0.000")
+                                UpOpVal = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("OPVALUE")), "0.00")
+                            Else
+                                Opquantity = 0
+                                Opamount = 0
+                                PURCHASERATE = 0
+                            End If
+
+                            sqlstring = "SELECT ISNULL(SUM(QTY),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM GRN_DETAILS WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOIDITEM,'') <>'Y' AND CAST(CONVERT(VARCHAR(11),GRNDATE,6) AS DATETIME)<='" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                            gconnection.getDataSet(sqlstring, "GRN_DETAILS")
+                            If gdataset.Tables("GRN_DETAILS").Rows.Count > 0 Then
+                                Grnquantity = Format(Val(gdataset.Tables("GRN_DETAILS").Rows(0).Item("QTY")), "0.000")
+                                Grnamount = Format(Val(gdataset.Tables("GRN_DETAILS").Rows(0).Item("AMOUNT")), "0.00")
+                                UpGrnQty = Format(Val(gdataset.Tables("GRN_DETAILS").Rows(0).Item("QTY")), "0.000")
+                                UpGrnVal = Format(Val(gdataset.Tables("GRN_DETAILS").Rows(0).Item("AMOUNT")), "0.00")
+                            Else
+                                Grnquantity = 0
+                                Grnamount = 0
+                                UpGrnQty = 0
+                                UpGrnVal = 0
+                            End If
+
+                            sqlstring = "SELECT ISNULL(SUM(QTY),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM STOCKISSUEDETAIL WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                            gconnection.getDataSet(sqlstring, "STOCKISSUEDETAIL")
+                            If gdataset.Tables("STOCKISSUEDETAIL").Rows.Count > 0 Then
+                                Issuequantity = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("Qty")), "0.000")
+                                Issueamount = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("AMOUNT")), "0.00")
+                                UpIssQty = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("QTY")), "0.000")
+                                UpIssVal = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("AMOUNT")), "0.00")
+                            Else
+                                Issuequantity = 0
+                                Issueamount = 0
+                                UpIssQty = 0
+                                UpIssVal = 0
+                            End If
+
+                            sqlstring = "SELECT ISNULL(SUM(ADJUSTEDSTOCK),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM STOCKADJUSTDETAILS WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                            gconnection.getDataSet(sqlstring, "STOCKADJUSTDETAILS")
+                            If gdataset.Tables("STOCKADJUSTDETAILS").Rows.Count > 0 Then
+                                adjustqty = Format(Val(gdataset.Tables("STOCKADJUSTDETAILS").Rows(0).Item("Qty")), "0.000")
+                                adjustamount = Format(Val(gdataset.Tables("STOCKADJUSTDETAILS").Rows(0).Item("AMOUNT")), "0.00")
+                                UpAdjQty = Format(Val(gdataset.Tables("STOCKADJUSTDETAILS").Rows(0).Item("QTY")), "0.000")
+                                UpAdjVal = Format(Val(gdataset.Tables("STOCKADJUSTDETAILS").Rows(0).Item("AMOUNT")), "0.00")
+                            Else
+                                adjustqty = 0
+                                adjustamount = 0
+                                UpAdjQty = 0
+                                UpAdjVal = 0
+                            End If
+
+                            sqlstring = "SELECT ISNULL(SUM(QTY),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM STOCKtransferDETAIL WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' and doctype='RET' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                            gconnection.getDataSet(sqlstring, "STOCKtransferDETAIL")
+                            If gdataset.Tables("STOCKISSUEDETAIL").Rows.Count > 0 Then
+                                transferqty = Format(Val(gdataset.Tables("STOCKtransferDETAIL").Rows(0).Item("Qty")), "0.000")
+                                transferamount = Format(Val(gdataset.Tables("STOCKtransferDETAIL").Rows(0).Item("AMOUNT")), "0.00")
+                                UpTrnQty = Format(Val(gdataset.Tables("STOCKtransferDETAIL").Rows(0).Item("QTY")), "0.000")
+                                UpTrnVal = Format(Val(gdataset.Tables("STOCKtransferDETAIL").Rows(0).Item("AMOUNT")), "0.00")
+                            Else
+                                transferqty = 0
+                                transferamount = 0
+                                UpTrnQty = 0
+                                UpTrnVal = 0
+                            End If
+                            '                    Clsquantity = (Val(Opquantity) + Val(Grnquantity) + Val(adjustqty) - Val(Issuequantity) + Val(transferqty))
+
+                            'Clsquantity = (Val(Opquantity) + Val(Grnquantity))
+
+                            'If Clsquantity <= 0 Then
+                            '    If Grnquantity <> 0 Then
+                            '        Calrate = Val(Grnamount) / Val(Grnquantity)
+                            '    ElseIf Issuequantity <> 0 Then
+                            '        sqlstring = "SELECT TOP 1 ISNULL(RATE,0) RATE FROM STOCKISSUEDETAIL WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                            '        gconnection.getDataSet(sqlstring, "STOCKISSUEDETAIL")
+                            '        If gdataset.Tables("STOCKISSUEDETAIL").Rows.Count > 0 Then
+                            '            Calrate = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("RATE")), "0.00")
+                            '        End If
+                            '    Else
+                            '        sqlstring = "SELECT ISNULL(PURCHASERATE,0) PURCHASERATE FROM INVENTORYITEMMASTER WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND STORECODE='MNS'"
+                            '        gconnection.getDataSet(sqlstring, "INVENTORYITEM")
+                            '        If gdataset.Tables("INVENTORYITEM").Rows.Count > 0 Then
+                            '            Calrate = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("PURCHASERATE")), "0.00")
+                            '            If Calrate <= 0 Then
+                            '                Calrate = (Val(Opamount) + Val(Grnamount)) / (Val(Clsquantity))
+                            '            End If
+                            '        End If
+                            '    End If
+                            'Else
+                            '    Calrate = (Val(Opamount) + Val(Grnamount)) / (Val(Clsquantity))
+                            'End If
+                            UpOpRate = Format((UpOpVal / UpOpQty), "0.00")
+                            UpGrnRate = Format((UpGrnVal / UpGrnQty), "0.00")
+                            UpIssRate = Format((UpIssVal / UpIssQty), "0.00")
+                            UpTrnRate = Format((UpTrnVal / UpTrnQty), "0.00")
+                            UpAdjRate = Format((UpAdjVal / UpAdjQty), "0.00")
+                            UpComRate = Format((UpComVal / UpComQty), "0.00")
+                            Count = 0
+                            If UpOpRate > 0 Then
+                                Count = Count + 1
+                            Else
+                                UpOpRate = 0
+                            End If
+                            If UpGrnRate > 0 Then
+                                Count = Count + 1
+                            Else
+                                UpGrnRate = 0
+                            End If
+                            If UpIssRate > 0 Then
+                                Count = Count + 1
+                            Else
+                                UpIssRate = 0
+                            End If
+                            If UpTrnRate > 0 Then
+                                Count = Count + 1
+                            Else
+                                UpTrnRate = 0
+                            End If
+                            If UpAdjRate > 0 Then
+                                Count = Count + 1
+                            Else
+                                UpAdjRate = 0
+                            End If
+                            Calrate = Val((UpOpRate + UpGrnRate + UpIssRate + UpTrnRate + UpAdjRate) / Count)
+
+                            sqlstring = "UPDATE STOCKISSUEDETAIL SET RATE=" & Calrate & " WHERE AUTOID=" & dr("AUTOID")
+                            ReDim Preserve INSERT(INSERT.Length)
+                            INSERT(INSERT.Length - 1) = sqlstring
+                            PBAR.Value = PBAR.Value + 1
+                            Count = 0
+                            UpOpQty = 0 : UpOpVal = 0 : UpGrnQty = 0 : UpGrnVal = 0 : UpIssQty = 0 : UpIssVal = 0 : UpTrnQty = 0 : UpTrnVal = 0 : UpAdjQty = 0 : UpAdjVal = 0 : UpComQty = 0 : UpComVal = 0 : UpOpRate = 0 : UpGrnRate = 0 : UpIssRate = 0 : UpTrnRate = 0 : UpAdjRate = 0 : UpComRate = 0
+                        Next
+                        sqlstring = "UPDATE STOCKISSUEDETAIL SET AMOUNT=QTY*RATE WHERE CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME) BETWEEN '" & Format(dtp_FROMdate.Value, "dd-MMM-yyyy") & "' AND '" & Format(dtp_TOdate.Value, "dd-MMM-yyyy") & "'"
+                        ReDim Preserve INSERT(INSERT.Length)
+                        INSERT(INSERT.Length - 1) = sqlstring
+                    End If
+                End If
+                PBAR.Value = 0
+            End If
+
+            If CHK_TFR.Checked = True Then
+                Dim Count As Integer
+                Dim UpOpQty, UpOpVal, UpGrnQty, UpGrnVal, UpIssQty, UpIssVal, UpTrnQty, UpTrnVal, UpAdjQty, UpAdjVal, UpComQty, UpComVal As Double
+                Dim UpOpRate, UpGrnRate, UpIssRate, UpTrnRate, UpAdjRate, UpComRate As Double
+                sqlstring = "SELECT * FROM STOCKTRANSFERDETAIL WHERE ISNULL(VOID,'')<>'Y' AND ITEMCODE = '" & Trim(txt_itemcode.Text) & "' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME) BETWEEN '" & Format(dtp_FROMdate.Value, "dd-MMM-yyyy") & "' AND '" & Format(dtp_TOdate.Value, "dd-MMM-yyyy") & "' ORDER BY AUTOID"
+                gconnection.getDataSet(sqlstring, "transfer")
+                If gdataset.Tables.Contains("transfer") Then
+                    If gdataset.Tables("transfer").Rows.Count > 0 Then
+                        PBAR.Maximum = gdataset.Tables("transfer").Rows.Count
+                        PBAR.Value = 0
+                        For Each dr In gdataset.Tables("transfer").Rows
+                            sqlstring = "SELECT ISNULL(PURCHASERATE,0) AS PURCHASERATE,ISNULL(OPSTOCK,0) AS OPSTOCK,ISNULL(OPVALUE,0) AS OPVALUE FROM INVENTORYITEMMASTER WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND STORECODE='MNS'"
+                            gconnection.getDataSet(sqlstring, "INVENTORYITEM")
+                            If gdataset.Tables("INVENTORYITEM").Rows.Count > 0 Then
+                                Opquantity = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("OPSTOCK")), "0.000")
+                                Opamount = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("OPVALUE")), "0.00")
+                                PURCHASERATE = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("PURCHASERATE")), "0.00")
+                                UpOpQty = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("OPSTOCK")), "0.000")
+                                UpOpVal = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("OPVALUE")), "0.00")
+                            Else
+                                Opquantity = 0
+                                Opamount = 0
+                                PURCHASERATE = 0
+                            End If
+
+                            sqlstring = "SELECT ISNULL(SUM(QTY),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM GRN_DETAILS WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOIDITEM,'') <>'Y' AND CAST(CONVERT(VARCHAR(11),GRNDATE,6) AS DATETIME)<='" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                            gconnection.getDataSet(sqlstring, "GRN_DETAILS")
+                            If gdataset.Tables("GRN_DETAILS").Rows.Count > 0 Then
+                                Grnquantity = Format(Val(gdataset.Tables("GRN_DETAILS").Rows(0).Item("QTY")), "0.000")
+                                Grnamount = Format(Val(gdataset.Tables("GRN_DETAILS").Rows(0).Item("AMOUNT")), "0.00")
+                                UpGrnQty = Format(Val(gdataset.Tables("GRN_DETAILS").Rows(0).Item("QTY")), "0.000")
+                                UpGrnVal = Format(Val(gdataset.Tables("GRN_DETAILS").Rows(0).Item("AMOUNT")), "0.00")
+                            Else
+                                Grnquantity = 0
+                                Grnamount = 0
+                                UpGrnQty = 0
+                                UpGrnVal = 0
+                            End If
+
+                            sqlstring = "SELECT ISNULL(SUM(QTY),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM STOCKISSUEDETAIL WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                            gconnection.getDataSet(sqlstring, "STOCKISSUEDETAIL")
+                            If gdataset.Tables("STOCKISSUEDETAIL").Rows.Count > 0 Then
+                                Issuequantity = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("Qty")), "0.000")
+                                Issueamount = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("AMOUNT")), "0.00")
+                                UpIssQty = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("QTY")), "0.000")
+                                UpIssVal = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("AMOUNT")), "0.00")
+                            Else
+                                Issuequantity = 0
+                                Issueamount = 0
+                                UpIssQty = 0
+                                UpIssVal = 0
+                            End If
+
+                            sqlstring = "SELECT ISNULL(SUM(ADJUSTEDSTOCK),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM STOCKADJUSTDETAILS WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                            gconnection.getDataSet(sqlstring, "STOCKADJUSTDETAILS")
+                            If gdataset.Tables("STOCKADJUSTDETAILS").Rows.Count > 0 Then
+                                adjustqty = Format(Val(gdataset.Tables("STOCKADJUSTDETAILS").Rows(0).Item("Qty")), "0.000")
+                                adjustamount = Format(Val(gdataset.Tables("STOCKADJUSTDETAILS").Rows(0).Item("AMOUNT")), "0.00")
+                                UpAdjQty = Format(Val(gdataset.Tables("STOCKADJUSTDETAILS").Rows(0).Item("QTY")), "0.000")
+                                UpAdjVal = Format(Val(gdataset.Tables("STOCKADJUSTDETAILS").Rows(0).Item("AMOUNT")), "0.00")
+                            Else
+                                adjustqty = 0
+                                adjustamount = 0
+                                UpAdjQty = 0
+                                UpAdjVal = 0
+                            End If
+
+                            sqlstring = "SELECT ISNULL(SUM(QTY),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM STOCKtransferDETAIL WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' and doctype='RET' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                            gconnection.getDataSet(sqlstring, "STOCKtransferDETAIL")
+                            If gdataset.Tables("STOCKISSUEDETAIL").Rows.Count > 0 Then
+                                transferqty = Format(Val(gdataset.Tables("STOCKtransferDETAIL").Rows(0).Item("Qty")), "0.000")
+                                transferamount = Format(Val(gdataset.Tables("STOCKtransferDETAIL").Rows(0).Item("AMOUNT")), "0.00")
+                                UpTrnQty = Format(Val(gdataset.Tables("STOCKtransferDETAIL").Rows(0).Item("QTY")), "0.000")
+                                UpTrnVal = Format(Val(gdataset.Tables("STOCKtransferDETAIL").Rows(0).Item("AMOUNT")), "0.00")
+                            Else
+                                transferqty = 0
+                                transferamount = 0
+                                UpTrnQty = 0
+                                UpTrnVal = 0
+                            End If
+
+                            UpOpRate = Format((UpOpVal / UpOpQty), "0.00")
+                            UpGrnRate = Format((UpGrnVal / UpGrnQty), "0.00")
+                            UpIssRate = Format((UpIssVal / UpIssQty), "0.00")
+                            UpTrnRate = Format((UpTrnVal / UpTrnQty), "0.00")
+                            UpAdjRate = Format((UpAdjVal / UpAdjQty), "0.00")
+                            UpComRate = Format((UpComVal / UpComQty), "0.00")
+                            Count = 0
+                            If UpOpRate > 0 Then
+                                Count = Count + 1
+                            Else
+                                UpOpRate = 0
+                            End If
+                            If UpGrnRate > 0 Then
+                                Count = Count + 1
+                            Else
+                                UpGrnRate = 0
+                            End If
+                            If UpIssRate > 0 Then
+                                Count = Count + 1
+                            Else
+                                UpIssRate = 0
+                            End If
+                            If UpTrnRate > 0 Then
+                                Count = Count + 1
+                            Else
+                                UpTrnRate = 0
+                            End If
+                            If UpAdjRate > 0 Then
+                                Count = Count + 1
+                            Else
+                                UpAdjRate = 0
+                            End If
+                            Calrate = Val((UpOpRate + UpGrnRate + UpIssRate + UpTrnRate + UpAdjRate) / Count)
+
+                            sqlstring = "UPDATE STOCKTRANSFERDETAIL SET RATE=" & Calrate & " WHERE AUTOID=" & dr("AUTOID")
+                            ReDim Preserve INSERT(INSERT.Length)
+                            INSERT(INSERT.Length - 1) = sqlstring
+                            PBAR.Value = PBAR.Value + 1
+                            Count = 0
+                            UpOpQty = 0 : UpOpVal = 0 : UpGrnQty = 0 : UpGrnVal = 0 : UpIssQty = 0 : UpIssVal = 0 : UpTrnQty = 0 : UpTrnVal = 0 : UpAdjQty = 0 : UpAdjVal = 0 : UpComQty = 0 : UpComVal = 0 : UpOpRate = 0 : UpGrnRate = 0 : UpIssRate = 0 : UpTrnRate = 0 : UpAdjRate = 0 : UpComRate = 0
+                        Next
+                        sqlstring = "UPDATE STOCKISSUEDETAIL SET AMOUNT=QTY*RATE WHERE CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME) BETWEEN '" & Format(dtp_FROMdate.Value, "dd-MMM-yyyy") & "' AND '" & Format(dtp_TOdate.Value, "dd-MMM-yyyy") & "'"
+                        ReDim Preserve INSERT(INSERT.Length)
+                        INSERT(INSERT.Length - 1) = sqlstring
+                    End If
+                End If
+                PBAR.Value = 0
+            End If
+
+            If CHK_ADJ.Checked = True Then
+                sqlstring = "SELECT * FROM STOCKADJUSTDETAILS WHERE ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME) BETWEEN '" & Format(dtp_FROMdate.Value, "dd-MMM-yyyy") & "' AND '" & Format(dtp_TOdate.Value, "dd-MMM-yyyy") & "' ORDER BY AUTOID"
+                gconnection.getDataSet(sqlstring, "adjust")
+                If gdataset.Tables.Contains("adjust") Then
+                    If gdataset.Tables("adjust").Rows.Count > 0 Then
+                        PBAR.Maximum = gdataset.Tables("adjust").Rows.Count
+                        PBAR.Value = 0
+                        For Each dr In gdataset.Tables("adjust").Rows
+                            sqlstring = "SELECT ISNULL(PURCHASERATE,0) AS PURCHASERATE,ISNULL(OPSTOCK,0) AS OPSTOCK,ISNULL(OPVALUE,0) AS OPVALUE FROM INVENTORYITEMMASTER WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND STORECODE='MNS'"
+                            gconnection.getDataSet(sqlstring, "INVENTORYITEM")
+                            If gdataset.Tables("INVENTORYITEM").Rows.Count > 0 Then
+                                Opquantity = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("OPSTOCK")), "0.000")
+                                Opamount = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("OPVALUE")), "0.00")
+                                PURCHASERATE = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("PURCHASERATE")), "0.00")
+                            Else
+                                Opquantity = 0
+                                Opamount = 0
+                                PURCHASERATE = 0
+                            End If
+                            sqlstring = "SELECT ISNULL(SUM(QTY),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM GRN_DETAILS WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOIDITEM,'') <>'Y' AND CAST(CONVERT(VARCHAR(11),GRNDATE,6) AS DATETIME)<='" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                            gconnection.getDataSet(sqlstring, "GRN_DETAILS")
+                            If gdataset.Tables("GRN_DETAILS").Rows.Count > 0 Then
+                                Grnquantity = Format(Val(gdataset.Tables("GRN_DETAILS").Rows(0).Item("QTY")), "0.000")
+                                Grnamount = Format(Val(gdataset.Tables("GRN_DETAILS").Rows(0).Item("AMOUNT")), "0.00")
+                            Else
+                                Grnquantity = 0
+                                Grnamount = 0
+                            End If
+
+                            sqlstring = "SELECT ISNULL(SUM(QTY),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM STOCKISSUEDETAIL WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                            gconnection.getDataSet(sqlstring, "STOCKISSUEDETAIL")
+                            If gdataset.Tables("STOCKISSUEDETAIL").Rows.Count > 0 Then
+                                Issuequantity = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("Qty")), "0.000")
+                                Issueamount = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("AMOUNT")), "0.00")
+                            Else
+                                Issuequantity = 0
+                                Issueamount = 0
+                            End If
+
+                            sqlstring = "SELECT ISNULL(SUM(ADJUSTEDSTOCK),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM STOCKADJUSTDETAILS WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                            gconnection.getDataSet(sqlstring, "STOCKADJUSTDETAILS")
+                            If gdataset.Tables("STOCKADJUSTDETAILS").Rows.Count > 0 Then
+                                adjustqty = Format(Val(gdataset.Tables("STOCKADJUSTDETAILS").Rows(0).Item("Qty")), "0.000")
+                                adjustamount = Format(Val(gdataset.Tables("STOCKADJUSTDETAILS").Rows(0).Item("AMOUNT")), "0.00")
+                            Else
+                                adjustqty = 0
+                                adjustamount = 0
+                            End If
+
+                            sqlstring = "SELECT ISNULL(SUM(QTY),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM STOCKtransferDETAIL WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                            gconnection.getDataSet(sqlstring, "STOCKtransferDETAIL")
+                            If gdataset.Tables("STOCKISSUEDETAIL").Rows.Count > 0 Then
+                                transferqty = Format(Val(gdataset.Tables("STOCKtransferDETAIL").Rows(0).Item("Qty")), "0.000")
+                                transferamount = Format(Val(gdataset.Tables("STOCKtransferDETAIL").Rows(0).Item("AMOUNT")), "0.00")
+                            Else
+                                transferqty = 0
+                                transferamount = 0
+                            End If
+                            '                    Clsquantity = (Val(Opquantity) + Val(Grnquantity) + Val(adjustqty) - Val(Issuequantity) + Val(transferqty))
+                            Clsquantity = (Val(Opquantity) + Val(Grnquantity))
+
+                            If Clsquantity <= 0 Then
+                                If Grnquantity <> 0 Then
+                                    Calrate = Val(Grnamount) / Val(Grnquantity)
+                                ElseIf Issuequantity <> 0 Then
+                                    sqlstring = "SELECT TOP 1 ISNULL(RATE,0) RATE FROM STOCKISSUEDETAIL WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                                    gconnection.getDataSet(sqlstring, "STOCKISSUEDETAIL")
+                                    If gdataset.Tables("STOCKISSUEDETAIL").Rows.Count > 0 Then
+                                        Calrate = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("RATE")), "0.00")
+                                    End If
+                                Else
+                                    sqlstring = "SELECT ISNULL(PURCHASERATE,0) PURCHASERATE FROM INVENTORYITEMMASTER WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND STORECODE='MNS'"
+                                    gconnection.getDataSet(sqlstring, "INVENTORYITEM")
+                                    If gdataset.Tables("INVENTORYITEM").Rows.Count > 0 Then
+                                        Calrate = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("PURCHASERATE")), "0.00")
+                                    End If
+                                End If
+                            Else
+                                Calrate = (Val(Opamount) + Val(Grnamount)) / (Val(Clsquantity))
+                            End If
+
+                            sqlstring = "UPDATE STOCKADJUSTDETAILS SET RATE=" & Calrate & " WHERE AUTOID=" & dr("AUTOID")
+                            ReDim Preserve INSERT(INSERT.Length)
+                            INSERT(INSERT.Length - 1) = sqlstring
+                            PBAR.Value = PBAR.Value + 1
+                        Next
+                        sqlstring = "UPDATE STOCKADJUSTDETAILS SET AMOUNT=ADJUSTEDSTOCK*RATE WHERE CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME) BETWEEN '" & Format(dtp_FROMdate.Value, "dd-MMM-yyyy") & "' AND '" & Format(dtp_TOdate.Value, "dd-MMM-yyyy") & "'"
+                        ReDim Preserve INSERT(INSERT.Length)
+                        INSERT(INSERT.Length - 1) = sqlstring
+                    End If
+                End If
+                PBAR.Value = 0
+            End If
+
+            If CHK_POS.Checked = True Then
+                sqlstring = "SELECT * FROM substoreconsumptiondetail WHERE ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME) BETWEEN '" & Format(dtp_FROMdate.Value, "dd-MMM-yyyy") & "' AND '" & Format(dtp_TOdate.Value, "dd-MMM-yyyy") & "' ORDER BY AUTOID"
+                gconnection.getDataSet(sqlstring, "adjust")
+                If gdataset.Tables.Contains("adjust") Then
+                    If gdataset.Tables("adjust").Rows.Count > 0 Then
+                        PBAR.Maximum = gdataset.Tables("adjust").Rows.Count
+                        PBAR.Value = 0
+                        For Each dr In gdataset.Tables("adjust").Rows
+                            sqlstring = "SELECT ISNULL(PURCHASERATE,0) AS PURCHASERATE,ISNULL(OPSTOCK,0) AS OPSTOCK,ISNULL(OPVALUE,0) AS OPVALUE FROM INVENTORYITEMMASTER WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND STORECODE='MNS'"
+                            gconnection.getDataSet(sqlstring, "INVENTORYITEM")
+                            If gdataset.Tables("INVENTORYITEM").Rows.Count > 0 Then
+                                Opquantity = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("OPSTOCK")), "0.000")
+                                Opamount = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("OPVALUE")), "0.00")
+                                PURCHASERATE = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("PURCHASERATE")), "0.00")
+                            Else
+                                Opquantity = 0
+                                Opamount = 0
+                                PURCHASERATE = 0
+                            End If
+                            sqlstring = "SELECT ISNULL(SUM(QTY),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM GRN_DETAILS WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOIDITEM,'') <>'Y' AND CAST(CONVERT(VARCHAR(11),GRNDATE,6) AS DATETIME)<='" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                            gconnection.getDataSet(sqlstring, "GRN_DETAILS")
+                            If gdataset.Tables("GRN_DETAILS").Rows.Count > 0 Then
+                                Grnquantity = Format(Val(gdataset.Tables("GRN_DETAILS").Rows(0).Item("QTY")), "0.000")
+                                Grnamount = Format(Val(gdataset.Tables("GRN_DETAILS").Rows(0).Item("AMOUNT")), "0.00")
+                            Else
+                                Grnquantity = 0
+                                Grnamount = 0
+                            End If
+
+                            sqlstring = "SELECT ISNULL(SUM(QTY),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM STOCKISSUEDETAIL WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                            gconnection.getDataSet(sqlstring, "STOCKISSUEDETAIL")
+                            If gdataset.Tables("STOCKISSUEDETAIL").Rows.Count > 0 Then
+                                Issuequantity = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("Qty")), "0.000")
+                                Issueamount = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("AMOUNT")), "0.00")
+                            Else
+                                Issuequantity = 0
+                                Issueamount = 0
+                            End If
+
+                            sqlstring = "SELECT ISNULL(SUM(ADJUSTEDSTOCK),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM STOCKADJUSTDETAILS WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                            gconnection.getDataSet(sqlstring, "STOCKADJUSTDETAILS")
+                            If gdataset.Tables("STOCKADJUSTDETAILS").Rows.Count > 0 Then
+                                adjustqty = Format(Val(gdataset.Tables("STOCKADJUSTDETAILS").Rows(0).Item("Qty")), "0.000")
+                                adjustamount = Format(Val(gdataset.Tables("STOCKADJUSTDETAILS").Rows(0).Item("AMOUNT")), "0.00")
+                            Else
+                                adjustqty = 0
+                                adjustamount = 0
+                            End If
+
+                            sqlstring = "SELECT ISNULL(SUM(QTY),0) AS QTY ,ISNULL(SUM(AMOUNT),0) AS AMOUNT FROM STOCKtransferDETAIL WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                            gconnection.getDataSet(sqlstring, "STOCKtransferDETAIL")
+                            If gdataset.Tables("STOCKISSUEDETAIL").Rows.Count > 0 Then
+                                transferqty = Format(Val(gdataset.Tables("STOCKtransferDETAIL").Rows(0).Item("Qty")), "0.000")
+                                transferamount = Format(Val(gdataset.Tables("STOCKtransferDETAIL").Rows(0).Item("AMOUNT")), "0.00")
+                            Else
+                                transferqty = 0
+                                transferamount = 0
+                            End If
+                            '                    Clsquantity = (Val(Opquantity) + Val(Grnquantity) + Val(adjustqty) - Val(Issuequantity) + Val(transferqty))
+                            Clsquantity = (Val(Opquantity) + Val(Grnquantity))
+
+                            If Clsquantity <= 0 Then
+                                If Grnquantity <> 0 Then
+                                    Calrate = Val(Grnamount) / Val(Grnquantity)
+                                ElseIf Issuequantity <> 0 Then
+                                    sqlstring = "SELECT TOP 1 ISNULL(RATE,0) RATE FROM STOCKISSUEDETAIL WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND ISNULL(VOID,'')<>'Y' AND CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME)<'" & Format(dr("DOCDATE"), "dd-MMM-yyyy") & "'"
+                                    gconnection.getDataSet(sqlstring, "STOCKISSUEDETAIL")
+                                    If gdataset.Tables("STOCKISSUEDETAIL").Rows.Count > 0 Then
+                                        Calrate = Format(Val(gdataset.Tables("STOCKISSUEDETAIL").Rows(0).Item("RATE")), "0.00")
+                                    End If
+                                Else
+                                    sqlstring = "SELECT ISNULL(PURCHASERATE,0) PURCHASERATE FROM INVENTORYITEMMASTER WHERE ITEMCODE='" & dr("ITEMCODE") & "' AND STORECODE='MNS'"
+                                    gconnection.getDataSet(sqlstring, "INVENTORYITEM")
+                                    If gdataset.Tables("INVENTORYITEM").Rows.Count > 0 Then
+                                        Calrate = Format(Val(gdataset.Tables("INVENTORYITEM").Rows(0).Item("PURCHASERATE")), "0.00")
+                                    End If
+                                End If
+                            Else
+                                Calrate = (Val(Opamount) + Val(Grnamount)) / (Val(Clsquantity))
+                            End If
+
+                            sqlstring = "UPDATE substoreconsumptiondetail SET RATE=" & Calrate & " WHERE AUTOID=" & dr("AUTOID")
+                            ReDim Preserve INSERT(INSERT.Length)
+                            INSERT(INSERT.Length - 1) = sqlstring
+                            PBAR.Value = PBAR.Value + 1
+                        Next
+                        sqlstring = "UPDATE substoreconsumptiondetail SET AMOUNT=QTY*RATE WHERE CAST(CONVERT(VARCHAR(11),DOCDATE,6) AS DATETIME) BETWEEN '" & Format(dtp_FROMdate.Value, "dd-MMM-yyyy") & "' AND '" & Format(dtp_TOdate.Value, "dd-MMM-yyyy") & "'"
+                        ReDim Preserve INSERT(INSERT.Length)
+                        INSERT(INSERT.Length - 1) = sqlstring
+                    End If
+                End If
+                PBAR.Value = 0
+            End If
+
+            gconnection.MoreTrans(INSERT)
+        End If
+
+        'MsgBox("Weighted Average Completed...", MsgBoxStyle.OKOnly, "Weighted Average")
+        cmd_exit_Click(sender, e)
+    End Sub
+    Private Sub cmd_exit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmd_exit.Click
+        Me.Close()
+    End Sub
+    Private Sub dtp_FROMdate_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles dtp_FROMdate.KeyPress
+        Try
+            If Asc(e.KeyChar) = 13 Then
+                dtp_TOdate.Focus()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Plz Check Error : Grn Date Keypress " & ex.Message, MyCompanyName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+            Exit Sub
+        End Try
+    End Sub
+    Private Sub dtp_TOdate_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles dtp_TOdate.KeyPress
+        Try
+            If Asc(e.KeyChar) = 13 Then
+                Cmd_UPDATE.Focus()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Plz Check Error : Grn Date Keypress " & ex.Message, MyCompanyName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+            Exit Sub
+        End Try
+    End Sub
+
+    Private Sub frmstockissuerate_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        dtp_FROMdate.Value = CDate("01/04/" & Trim(gFinancalyearStart))
+        dtp_TOdate.Value = CDate("31/03/" & Trim(gFinancialyearEnd))
+    End Sub
+End Class
+

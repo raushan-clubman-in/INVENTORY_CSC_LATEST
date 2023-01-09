@@ -1,0 +1,7 @@
+ADDED STORECODE VARCHAR(50) , STOREDESC VARCHAR(50) fields
+IN BELOW TABLES
+	grn_header
+	grn_detail 
+
+
+

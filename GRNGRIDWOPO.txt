@@ -1,0 +1,497 @@
+ Private Sub ssgrid_KeyDownEvent(ByVal sender As Object, ByVal e As AxFPSpreadADO._DSpreadEvents_KeyDownEvent) Handles ssgrid.KeyDownEvent
+        Dim ItemQty, ItemAmount, ItemRate, Highratio, Dblamount As Double
+        Dim sqlstring, Itemcode, Itemdesc As String
+        Dim focusbool As Boolean
+        Dim VaritemDesc As String
+        Dim i, j, K As Integer
+        search = Nothing
+        Try
+            If e.keyCode = Keys.Enter Then
+                i = ssgrid.ActiveRow
+                If ssgrid.ActiveCol = 1 Then
+                    ssgrid.Col = 2
+                    ssgrid.Row = 1
+                    VaritemDesc = Trim(ssgrid.Text)
+                    ssgrid.Col = 1
+                    ssgrid.Row = i
+                    If ssgrid.Lock = False Then
+                        If Trim(ssgrid.Text) = "" Then
+                            Call FillMenu() ''' IT WILL SHOW A POPUP MENU FOR ITEM CODE
+                        ElseIf Trim(ssgrid.Text) <> "" Then
+                            If VaritemDesc = "" Then
+                                Itemcode = Trim(ssgrid.Text)
+                                ssgrid.ClearRange(1, ssgrid.ActiveRow, 10, ssgrid.ActiveRow, True)
+                                '''****************************** $ TO fill ITEMCODE,ITEMDESC,ITEMTYPE  $ **************************************'''
+                                sqlstring = " SELECT DISTINCT ISNULL(I.ITEMCODE,'') AS ITEMCODE,ISNULL(I.ITEMNAME,'') AS ITEMNAME,ISNULL(I.STOCKUOM,'') AS STOCKUOM,ISNULL(I.PURCHASERATE,0) AS PURCHASERATE, "
+                                sqlstring = sqlstring & " ISNULL(O.CONVUOM,'') AS CONVUOM,ISNULL(O.HIGHRATIO,0) AS HIGHRATIO FROM INVENTORYITEMMASTER AS I INNER JOIN OPENINGSTOCK  AS O ON O.ITEMCODE = I.ITEMCODE "
+                                sqlstring = sqlstring & " WHERE I.ITEMCODE ='" & Trim(Itemcode) & "'  AND ISNULL(I.FREEZE,'') <> 'Y'  AND CATEGORY = '" & Trim(CMB_CATEGORY.Text) & "' AND STORECODE='MNS' "
+                                gconnection.getDataSet(sqlstring, "INVENTORYITEMMASTER")
+                                If gdataset.Tables("INVENTORYITEMMASTER").Rows.Count > 0 Then
+                                    ssgrid.SetText(1, i, Trim(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("ITEMCODE")))
+                                    'For K = 1 To ssgrid.DataRowCnt
+                                    '    ssgrid.Row = K
+                                    '    ssgrid.Col = 1
+                                    '    If Itemvalidate(ssgrid, Trim(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("ITEMCODE")), 1) = True Then
+                                    '        ssgrid.SetActiveCell(0, ssgrid.ActiveRow)
+                                    '        ssgrid.Focus()
+                                    '        Exit Sub
+                                    '    End If
+                                    'Next
+                                    ssgrid.SetText(2, i, Trim(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("ITEMNAME")))
+                                    ssgrid.Col = 3
+                                    ssgrid.TypeComboBoxString = Trim(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("STOCKUOM"))
+                                    ssgrid.Text = Trim(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("STOCKUOM"))
+                                    ssgrid.SetText(5, i, Format(Val(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("PURCHASERATE")), "0.00"))
+                                    ssgrid.SetText(10, i, Trim(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("CONVUOM")))
+                                    ssgrid.SetText(11, i, Format(Val(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("HIGHRATIO")), "0.00"))
+                                    ssgrid.SetActiveCell(3, ssgrid.ActiveRow)
+                                    ssgrid.Focus()
+                                Else
+                                    MessageBox.Show("Specified ITEM CODE not found", MyCompanyName, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                    ssgrid.SetActiveCell(0, ssgrid.ActiveRow)
+                                    ssgrid.Text = ""
+                                    ssgrid.Focus()
+                                    Exit Sub
+                                End If
+                            End If
+                        End If
+                    Else
+                        ssgrid.SetActiveCell(1, ssgrid.ActiveRow)
+                    End If
+                ElseIf ssgrid.ActiveCol = 2 Then
+                    ssgrid.Col = 2
+                    ssgrid.Row = i
+                    If ssgrid.Lock = False Then
+                        If Trim(ssgrid.Text) = "" Then
+                            Call FillMenuItem() ''' IT WILL SHOW A POPUP MENU FOR ITEM CODE
+                        Else
+                            ssgrid.Col = 4
+                            ssgrid.Row = i
+                            If Trim(ssgrid.Text) = "" Then
+                                Itemdesc = Trim(ssgrid.Text)
+                                ssgrid.ClearRange(1, ssgrid.ActiveRow, 10, ssgrid.ActiveRow, True)
+                                '''****************************** $ TO fill ITEMCODE,ITEMDESC  $ **************************************'''
+                                sqlstring = " SELECT DISTINCT ISNULL(I.ITEMCODE,'') AS ITEMCODE,ISNULL(I.ITEMNAME,'') AS ITEMNAME,ISNULL(I.STOCKUOM,'') AS STOCKUOM,ISNULL(I.PURCHASERATE,0) AS PURCHASERATE, "
+                                sqlstring = sqlstring & " ISNULL(O.CONVUOM,'') AS CONVUOM,ISNULL(O.HIGHRATIO,0) AS HIGHRATIO FROM INVENTORYITEMMASTER AS I INNER JOIN OPENINGSTOCK  AS O ON O.ITEMCODE = I.ITEMCODE "
+                                sqlstring = sqlstring & " WHERE I.ITEMNAME ='" & Trim(Itemdesc) & "'  AND ISNULL(I.FREEZE,'') <> 'Y'  AND CATEGORY = '" & Trim(CMB_CATEGORY.Text) & "'"
+                                gconnection.getDataSet(sqlstring, "inventoryitemMaster")
+                                If gdataset.Tables("inventoryitemMaster").Rows.Count > 0 Then
+                                    ssgrid.SetText(1, i, Trim(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("ITEMCODE")))
+                                    'For K = 1 To ssgrid.DataRowCnt
+                                    '    ssgrid.Row = K
+                                    '    ssgrid.Col = 1
+                                    '    If Itemvalidate(ssgrid, Trim(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("ITEMCODE")), 1) = True Then
+                                    '        ssgrid.SetActiveCell(1, ssgrid.ActiveRow)
+                                    '        ssgrid.Focus()
+                                    '        Exit Sub
+                                    '    End If
+                                    'Next
+                                    ssgrid.SetText(2, i, Trim(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("ITEMNAME")))
+                                    ssgrid.Col = 3
+                                    ssgrid.TypeComboBoxString = Trim(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("STOCKUOM"))
+                                    ssgrid.Text = Trim(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("STOCKUOM"))
+                                    ssgrid.SetText(5, i, Format(Val(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("PURCHASERATE")), "0.00"))
+                                    ssgrid.SetText(10, i, Trim(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("CONVUOM")))
+                                    ssgrid.SetText(11, i, Format(Val(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("HIGHRATIO")), "0.00"))
+                                    ssgrid.SetActiveCell(3, ssgrid.ActiveRow)
+                                    ssgrid.Focus()
+                                Else
+                                    MessageBox.Show("Specified ITEM DESCRIPTION not found", MyCompanyName, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                    ssgrid.SetActiveCell(1, ssgrid.ActiveRow)
+                                    ssgrid.Text = ""
+                                    ssgrid.Focus()
+                                    Exit Sub
+                                End If
+                            End If
+                        End If
+                    End If
+                ElseIf ssgrid.ActiveCol = 3 Then
+                    ssgrid.Col = 3
+                    ssgrid.Row = i
+                    If ssgrid.Lock = False Then
+                        If Trim(ssgrid.Text) = "" Then
+                            ssgrid.SetActiveCell(3, ssgrid.ActiveRow)
+                        Else
+                            ssgrid.SetActiveCell(3, ssgrid.ActiveRow)
+                        End If
+                    End If
+                ElseIf ssgrid.ActiveCol = 4 Then
+                    ssgrid.Col = 4
+                    ssgrid.Row = i
+                    ItemQty = Val(ssgrid.Text)
+                    If ssgrid.Lock = False Then
+                        If Val(ssgrid.Text) = 0 Then
+                            ssgrid.SetActiveCell(3, ssgrid.ActiveRow)
+                        Else
+                            Call Calculate() '''--> Calculate total amount
+                            ssgrid.SetActiveCell(4, ssgrid.ActiveRow)
+                            ssgrid.Focus()
+                        End If
+                    End If
+                ElseIf ssgrid.ActiveCol = 5 Then
+                    ssgrid.Col = 5
+                    ssgrid.Row = i
+                    If ssgrid.Lock = False Then
+                        If Val(ssgrid.Text) = 0 Then
+                            ssgrid.SetActiveCell(4, ssgrid.ActiveRow)
+                        Else
+                            Call Calculate() '''--> Calculate total amount
+                            ssgrid.SetActiveCell(5, ssgrid.ActiveRow)
+                            ssgrid.Focus()
+                        End If
+                    End If
+                ElseIf ssgrid.ActiveCol = 6 Then
+                    ssgrid.Col = 6
+                    ssgrid.Row = i
+                    Call Calculate() '''--> Calculate total amount
+                            ssgrid.SetActiveCell(6, ssgrid.ActiveRow)
+                            ssgrid.Focus()
+                ElseIf ssgrid.ActiveCol = 7 Then
+                    ssgrid.Col = 7
+                    ssgrid.Row = i
+                            Call Calculate() '''--> Calculate total amount
+                            ssgrid.SetActiveCell(7, ssgrid.ActiveRow)
+                            ssgrid.Focus()
+
+                ElseIf ssgrid.ActiveCol = 8 Then
+                    ssgrid.Col = 8
+                    ssgrid.Row = i
+                    If ssgrid.Lock = False Then
+                        If Val(ssgrid.Text) = 0 Then
+                            Call Calculate() '''--> Calculate total amount
+                            ssgrid.Col = 8
+                            ssgrid.Row = ssgrid.ActiveRow
+                            ssgrid.Text = "0.00"
+                            ssgrid.Row = ssgrid.ActiveRow + 1
+                            ssgrid.Col = 1
+                            ssgrid.Lock = False
+                            ssgrid.Col = 2
+                            ssgrid.Lock = False
+                            ssgrid.Col = 3
+                            ssgrid.Lock = False
+                            ssgrid.Col = 4
+                            ssgrid.Lock = False
+                            ssgrid.Col = 5
+                            ssgrid.Lock = False
+                            ssgrid.Col = 6
+                            ssgrid.Lock = False
+                            ssgrid.Col = 7
+                            ssgrid.Lock = False
+                            ssgrid.Col = 8
+                            ssgrid.Lock = False
+                            ssgrid.SetActiveCell(0, ssgrid.ActiveRow + 1)
+                        Else
+                            Call Calculate() '''--> Calculate total amount
+                            ssgrid.Row = ssgrid.ActiveRow + 1
+                            ssgrid.Col = 1
+                            ssgrid.Lock = False
+                            ssgrid.Col = 2
+                            ssgrid.Lock = False
+                            ssgrid.Col = 3
+                            ssgrid.Lock = False
+                            ssgrid.Col = 4
+                            ssgrid.Lock = False
+                            ssgrid.Col = 5
+                            ssgrid.Lock = False
+                            ssgrid.Col = 6
+                            ssgrid.Lock = False
+                            ssgrid.Col = 7
+                            ssgrid.Lock = False
+                            ssgrid.Col = 8
+                            ssgrid.Lock = False
+                            ssgrid.SetActiveCell(0, ssgrid.ActiveRow + 1)
+                        End If
+                    End If
+                ElseIf ssgrid.ActiveCol = 9 Then
+                    ssgrid.Col = 9
+                    ssgrid.Row = i
+                    ItemAmount = Val(ssgrid.Text)
+                    If ssgrid.Lock = False Then
+                        If Trim(ssgrid.Text) = "" Then
+                            ssgrid.SetActiveCell(8, ssgrid.ActiveRow)
+                        Else
+                            ssgrid.Col = 4
+                            ItemQty = Val(ssgrid.Text)
+                            ItemRate = Val(ItemAmount) / Val(ItemQty)
+                            ssgrid.SetText(5, ssgrid.ActiveRow, ItemRate)
+                            ssgrid.SetActiveCell(0, ssgrid.ActiveRow + 1)
+                        End If
+                    End If
+                ElseIf ssgrid.ActiveCol = 10 Then
+                    ssgrid.Col = 10
+                    ssgrid.Row = i
+                    If ssgrid.Lock = False Then
+                        If Trim(ssgrid.Text) = "" Then
+                            ssgrid.SetActiveCell(9, ssgrid.ActiveRow)
+                        Else
+                            ssgrid.SetActiveCell(0, ssgrid.ActiveRow + 1)
+                        End If
+                    End If
+                ElseIf ssgrid.ActiveCol = 11 Then
+                    ssgrid.Col = 11
+                    ssgrid.Row = i
+                    If ssgrid.Lock = False Then
+                        If Trim(ssgrid.Text) = "" Then
+                            ssgrid.SetActiveCell(10, ssgrid.ActiveRow)
+                        Else
+                            ssgrid.SetActiveCell(0, ssgrid.ActiveRow + 1)
+                        End If
+                    End If
+                ElseIf ssgrid.ActiveCol = 12 Then
+                    ssgrid.Col = 3
+                    ssgrid.Row = i
+                    If ssgrid.Lock = False Then
+                        If Val(ssgrid.Text) = 0 Then
+                            ssgrid.SetActiveCell(11, ssgrid.ActiveRow)
+                        Else
+                            ssgrid.SetActiveCell(0, ssgrid.ActiveRow + 1)
+                        End If
+                    End If
+                End If
+            ElseIf e.keyCode = Keys.F4 Then
+                If ssgrid.ActiveCol = 1 Then
+                    ssgrid.Col = 1
+                    ssgrid.Row = i
+                    If ssgrid.Lock = False Then
+                        ssgrid.Col = 1
+                        ssgrid.Row = ssgrid.ActiveRow
+                        search = Trim(ssgrid.Text)
+                        Call FillMenu()
+                    End If
+                ElseIf ssgrid.ActiveCol = 2 Then
+                    ssgrid.Col = 2
+                    ssgrid.Row = i
+                    If ssgrid.Lock = False Then
+                        ssgrid.Col = 2
+                        ssgrid.Row = ssgrid.ActiveRow
+                        search = Trim(ssgrid.Text)
+                        Call FillMenuItem()
+                    End If
+                End If
+            ElseIf e.keyCode = Keys.F3 Then
+                ssgrid.Col = ssgrid.ActiveCol
+                ssgrid.Row = i
+                ssgrid.Row = ssgrid.ActiveRow
+                ssgrid.ClearRange(1, ssgrid.ActiveRow, 17, ssgrid.ActiveRow, True)
+                ssgrid.DeleteRows(ssgrid.ActiveRow, 1)
+                Call Calculate()
+                ssgrid.Row = ssgrid.ActiveRow
+                ssgrid.Col = 1
+                ssgrid.Lock = False
+                ssgrid.Col = 2
+                ssgrid.Lock = False
+                ssgrid.Col = 3
+                ssgrid.Lock = False
+                ssgrid.Col = 4
+                ssgrid.Lock = False
+                ssgrid.Col = 5
+                ssgrid.Lock = False
+                ssgrid.Col = 6
+                ssgrid.Lock = False
+                ssgrid.Col = 7
+                ssgrid.Lock = False
+                ssgrid.Col = 8
+                ssgrid.Lock = False
+
+                ssgrid.SetActiveCell(1, ssgrid.ActiveRow)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Plz Check Error : ssgrid_KeyDownEvent " & ex.Message, MyCompanyName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+            Exit Sub
+        End Try
+
+=====================================================
+
+
+
+Private Sub ssgrid_LeaveCell(ByVal sender As Object, ByVal e As AxFPSpreadADO._DSpreadEvents_LeaveCellEvent) Handles ssgrid.LeaveCell
+        Dim ItemQty, ItemAmount, ItemRate, Highratio, Dblamount, DblQty As Double
+        Dim sqlstring, Itemcode, Itemdesc As String
+        Dim discount, quantity As Double
+        Dim focusbool As Boolean
+        Dim i, j As Integer
+        Dim vitemdesc As String
+        search = Nothing
+        Try
+            i = ssgrid.ActiveRow
+            If ssgrid.ActiveCol = 2 Then
+                ssgrid.Col = 2
+                ssgrid.Row = i
+                vitemdesc = Trim(ssgrid.Text)
+                ssgrid.Col = 4
+                ssgrid.Row = i
+                DblQty = Val(ssgrid.Text)
+                ssgrid.Col = 2
+                ssgrid.Row = i
+                If ssgrid.Lock = False Then
+                    If Trim(ssgrid.Text) <> "" Then
+                        If vitemdesc = "" Then
+                            If Val(DblQty) = 0 Then
+                                Itemdesc = Trim(ssgrid.Text)
+                                ssgrid.ClearRange(1, ssgrid.ActiveRow, 12, ssgrid.ActiveRow, True)
+                                '''****************************** $ TO fill ITEMCODE,ITEMDESC  $ **************************************'''
+                                sqlstring = " SELECT DISTINCT ISNULL(I.ITEMCODE,'') AS ITEMCODE,ISNULL(I.ITEMNAME,'') AS ITEMNAME,ISNULL(I.STOCKUOM,'') AS STOCKUOM,ISNULL(I.PURCHASERATE,0) AS PURCHASERATE, "
+                                sqlstring = sqlstring & " ISNULL(O.CONVUOM,'') AS CONVUOM,ISNULL(O.HIGHRATIO,0) AS HIGHRATIO FROM INVENTORYITEMMASTER AS I INNER JOIN OPENINGSTOCK  AS O ON O.ITEMCODE = I.ITEMCODE "
+                                sqlstring = sqlstring & " WHERE I.ITEMNAME ='" & Trim(Itemdesc) & "'  AND ISNULL(I.FREEZE,'') <> 'Y'"
+                                gconnection.getDataSet(sqlstring, "inventoryitemMaster")
+                                If gdataset.Tables("inventoryitemMaster").Rows.Count > 0 Then
+                                    ssgrid.SetText(1, i, Trim(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("ITEMCODE")))
+                                    ssgrid.SetText(2, i, Trim(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("ITEMNAME")))
+                                    ssgrid.SetText(3, i, Trim(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("STOCKUOM")))
+                                    ssgrid.SetText(5, i, Format(Val(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("PURCHASERATE")), "0.00"))
+                                    ssgrid.SetText(11, i, Trim(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("CONVUOM")))
+                                    ssgrid.SetText(12, i, Format(Val(gdataset.Tables("INVENTORYITEMMASTER").Rows(j).Item("HIGHRATIO")), "0.00"))
+                                    ssgrid.SetActiveCell(4, ssgrid.ActiveRow)
+                                    ssgrid.Focus()
+                                Else
+                                    MessageBox.Show("Specified ITEM DESCRIPTION not found", MyCompanyName, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                    ssgrid.SetActiveCell(1, ssgrid.ActiveRow)
+                                    ssgrid.Text = ""
+                                    ssgrid.Focus()
+                                    Exit Sub
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+            ElseIf ssgrid.ActiveCol = 3 Then
+                ssgrid.Col = 3
+                ssgrid.Row = i
+                If ssgrid.Lock = False Then
+                    If Trim(ssgrid.Text) = "" Then
+                        ssgrid.SetActiveCell(4, ssgrid.ActiveRow)
+                    Else
+                        ssgrid.SetActiveCell(4, ssgrid.ActiveRow)
+                    End If
+                End If
+            ElseIf ssgrid.ActiveCol = 4 Then
+                ssgrid.Col = 4
+                ssgrid.Row = i
+                If ssgrid.Lock = False Then
+                    If Val(ssgrid.Text) = 0 Then
+                        ssgrid.SetActiveCell(4, ssgrid.ActiveRow)
+                    Else
+                        Call Calculate() '''--> Calculate total amount
+                        ssgrid.SetActiveCell(5, ssgrid.ActiveRow)
+                    End If
+                End If
+            ElseIf ssgrid.ActiveCol = 5 Then
+                ssgrid.Col = 5
+                ssgrid.Row = i
+                        Call Calculate() '''--> Calculate total amount
+                        ssgrid.SetActiveCell(6, ssgrid.ActiveRow)
+            ElseIf ssgrid.ActiveCol = 6 Then
+                ssgrid.Col = 6
+                ssgrid.Row = i
+                Call Calculate() '''--> Calculate total amount
+                ssgrid.SetActiveCell(7, ssgrid.ActiveRow)
+            ElseIf ssgrid.ActiveCol = 7 Then
+                ssgrid.Col = 7
+                ssgrid.Row = i
+                Call Calculate() '''--> Calculate total amount
+                ssgrid.SetActiveCell(8, ssgrid.ActiveRow)
+            ElseIf ssgrid.ActiveCol = 8 Then
+                ssgrid.Col = 8
+                ssgrid.Row = i
+                If ssgrid.Lock = False Then
+                    If Val(ssgrid.Text) = 0 Then
+                        Call Calculate() '''--> Calculate total amount
+                        ssgrid.Col = 8
+                        ssgrid.Row = ssgrid.ActiveRow
+                        ssgrid.Text = "0.00"
+                        ssgrid.Row = ssgrid.ActiveRow + 1
+                        ssgrid.Col = 1
+                        ssgrid.Lock = False
+                        ssgrid.Col = 2
+                        ssgrid.Lock = False
+                        ssgrid.Col = 3
+                        ssgrid.Lock = False
+                        ssgrid.Col = 4
+                        ssgrid.Lock = False
+                        ssgrid.Col = 5
+                        ssgrid.Lock = False
+                        ssgrid.Col = 6
+                        ssgrid.Lock = False
+                        ssgrid.Col = 7
+                        ssgrid.Lock = False
+                        ssgrid.Col = 8
+                        ssgrid.Lock = False
+
+                        ssgrid.SetActiveCell(1, ssgrid.ActiveRow + 1)
+                    Else
+                        Call Calculate() '''--> Calculate total amount
+                        ssgrid.Row = ssgrid.ActiveRow + 1
+                        ssgrid.Col = 1
+                        ssgrid.Lock = False
+                        ssgrid.Col = 2
+                        ssgrid.Lock = False
+                        ssgrid.Col = 3
+                        ssgrid.Lock = False
+                        ssgrid.Col = 4
+                        ssgrid.Lock = False
+                        ssgrid.Col = 5
+                        ssgrid.Lock = False
+                        ssgrid.Col = 6
+                        ssgrid.Lock = False
+                        ssgrid.Col = 7
+                        ssgrid.Lock = False
+                        ssgrid.Col = 8
+                        ssgrid.Lock = False
+
+                        ssgrid.SetActiveCell(1, ssgrid.ActiveRow + 1)
+                    End If
+                End If
+            ElseIf ssgrid.ActiveCol = 9 Then
+                ssgrid.Col = 9
+                ssgrid.Row = i
+                ItemAmount = Format(ssgrid.Text, "0.00")
+                If ssgrid.Lock = False Then
+                    If Trim(ssgrid.Text) = "" Then
+                        ssgrid.SetActiveCell(9, ssgrid.ActiveRow)
+                    Else
+                        ssgrid.Col = 4
+                        ItemQty = Format(ssgrid.Text, "0.00")
+                        ItemRate = ItemAmount / ItemQty
+                        ssgrid.Text = Format(ItemRate, "0.00")
+                        ssgrid.SetActiveCell(1, ssgrid.ActiveRow + 1)
+                    End If
+                End If
+            ElseIf ssgrid.ActiveCol = 10 Then
+                ssgrid.Col = 10
+                ssgrid.Row = i
+                If ssgrid.Lock = False Then
+                    If Trim(ssgrid.Text) = "" Then
+                        ssgrid.SetActiveCell(10, ssgrid.ActiveRow)
+                    Else
+                        ssgrid.SetActiveCell(1, ssgrid.ActiveRow + 1)
+                    End If
+                End If
+            ElseIf ssgrid.ActiveCol = 11 Then
+                ssgrid.Col = 11
+                ssgrid.Row = i
+                If ssgrid.Lock = False Then
+                    If Trim(ssgrid.Text) = "" Then
+                        ssgrid.SetActiveCell(11, ssgrid.ActiveRow)
+                    Else
+                        ssgrid.SetActiveCell(1, ssgrid.ActiveRow + 1)
+                    End If
+                End If
+            ElseIf ssgrid.ActiveCol = 12 Then
+                ssgrid.Col = 3
+                ssgrid.Row = i
+                If ssgrid.Lock = False Then
+                    If Trim(ssgrid.Text) = "" Then
+                        ssgrid.SetActiveCell(12, ssgrid.ActiveRow)
+                    Else
+                        ssgrid.SetActiveCell(1, ssgrid.ActiveRow + 1)
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Plz Check Error : ssgrid_LeaveCell " & ex.Message, MyCompanyName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+            Exit Sub
+        End Try
+    End Sub
+
+
+

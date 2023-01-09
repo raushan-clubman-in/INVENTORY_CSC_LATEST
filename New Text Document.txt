@@ -1,0 +1,244 @@
+
+--	set @Sql='if Not Exists(select a.name from '+@Datafile_PrevYear+'..syscolumns a,'+@Datafile_PrevYear+'..sysobjects b where b.xtype='+CHAR(39)+'U'+CHAR(39)+' and a.id=b.id and b.name='+char(39)+'InventoryItemMaster'+char(39)+' and UPPER(A.NAME)='+char(39)+'PREFIX'+char(39)+')'
+--	Set @Sql = @Sql + ' Begin '
+--        Set @Sql = @Sql + 'ALTER TABLE Inventoryitemmaster ADD PREFIX VARCHAR(10)'
+--	Set @Sql = @Sql + ' End '
+--	Print (@Sql)
+--        Exec (@Sql)
+
+--	set @Sql='if Not Exists(select a.name from '+@Datafile_PrevYear+'..syscolumns a,'+@Datafile_PrevYear+'..sysobjects b where b.xtype='+CHAR(39)+'U'+CHAR(39)+' and a.id=b.id and b.name='+char(39)+'InventoryItemMaster'+char(39)+' and UPPER(A.NAME)='+char(39)+'STARTDATE'+char(39)+')'
+--	Set @Sql = @Sql + ' Begin '
+--        Set @Sql = @Sql + 'ALTER TABLE Inventoryitemmaster ADD STARTDATE DATETIME'
+--	Set @Sql = @Sql + ' End '
+--	Print (@Sql)
+--        Exec (@Sql)
+
+
+----FOR STOCK UPDATE
+--if @stocktrn='Y'
+--begin
+--Set @Sql = 'Use ' + @Datafile_PrevYear
+--Print (@Sql)
+--        Exec (@Sql)
+-- If Exists(select * from sysobjects where type='P' and name='CP_STOCKSUMMARY4')
+-- begin
+--	DECLARE abc CURSOR FOR select storecode FROM STOREMASTER WHERE STORECODE IN(SELECT STORECODE FROM INVENTORYITEMMASTER)
+--	open abc
+--	Fetch abc into @storecode
+--	while @@fetch_Status=0
+--	Begin
+--	set @Sql='UPDATE ' + @Datafile_PrevYear + '..inventoryitemmaster SET SELECTOPT='+char(39)+'N'+char(39)
+--	Print (@Sql)
+--	Exec (@Sql)
+--	set @Sql='UPDATE ' + @Datafile_PrevYear + '..inventoryitemmaster SET SELECTOPT='+char(39)+'Y'+char(39)
+--	 print (@Sql)
+--	Exec (@Sql)
+--	--set @Sql='exec CP_STOCKSUMMARY3  @STORECODE='+char(39)+ @storecode +char(39)+',@FROMDATE='+char(39)+@Startingdate+ char(39)+',@TODATE='+char(39)+@endingdate+char(39)+',@FINYEARSTART='+char(39)+@Startingdate+ char(39)+',@TODAT='+char(39)+@endingdate+char(39)
+--	--Print (@Sql)
+--	--Exec (@Sql)
+--	--set @Sql='update ' + @datafile + '..inventoryitemmaster set opstock=a.clsqty,opvalue=a.clsval from ' + @Datafile_PrevYear +'..STOCKSUMMARY a where a.storecode=' + @datafile + '..inventoryitemmaster.storecode and a.itemcode=' + @datafile + '..inventoryitemmaster.itemcode'
+--	----select * from inventoryitemmaster
+--	--Print (@Sql)
+--	--Exec (@Sql)
+--	Print (@ShortName)
+--	 --IF @ShortName ='AU'
+--	--BEGIN
+--	set @ccname=''
+--	set @ssql='select a.name from '+@Datafile_PrevYear+'..syscolumns a,'+@Datafile_PrevYear+'..sysobjects b where b.xtype='+CHAR(39)+'p'+CHAR(39)+' and a.id=b.id and b.name='+char(39)+'CP_STOCKSUMMARY4'+char(39)+' and UPPER(A.NAME) not in (select c.name from '+@Datafile_PrevYear+'..syscolumns c,'+@Datafile_PrevYear+'..sysobjects d where d.xtype='+char(39)+'p'+char(39)+' and c.id=d.id AND ISNULL(c.AUTOVAL,0)=0  AND ISNULL(COLSTAT,0)=1 group by c.name)'
+--	print (@ssql)
+--	set @TSql='DECLARE posjv CURSOR FOR ' + @ssql
+--	print (@TSql)
+--	exec (@TSQL)
+--	Open POSJV
+--	Fetch POSJV InTo @cname
+--	While (@@Fetch_Status=0)
+--	Begin 
+--	if @cname='@STORECODE' 
+--	begin
+--	Set @ccname=@ccname+@cname+'='+char(39)+ @storecode +char(39)+','
+--	end 
+--	if @cname='@FROMDATE' 
+--	begin
+--	Set @ccname=@ccname+@cname+'='+char(39)+ @Startingdate +char(39)+','
+--	end  
+--	if @cname='@TODATE' 
+--	begin
+--	Set @ccname=@ccname+@cname+'='+char(39)+ @endingdate +char(39)+','
+--	end  
+--	if @cname='@FINYEARSTART' 
+--	begin
+--	Set @ccname=@ccname+@cname+'='+char(39)+ @Startingdate +char(39)+','
+--	end 
+--	if @cname='@TODAT' 
+--	begin
+--	Set @ccname=@ccname+@cname+'='+char(39)+ @endingdate +char(39)+','
+--	end 
+--	--Set @ccname=@ccname+@cname+','
+--	Fetch POSJV InTo @cname
+--	End
+--	if len(@ccname)>1
+--	Begin
+--		set @ccname=substring(@ccname,1,len(@ccname)-1)
+--	End
+--	Close PosJv
+--	DeAllocate PosJv
+--	Set @Sql = 'Use ' + @Datafile_PrevYear
+--Print (@Sql)
+--        Exec (@Sql)
+--	--set @Sql='exec CP_STOCKSUMMARY3  @FROMDATE='+char(39)+@Startingdate+ char(39)+',@TODATE='+char(39)+@endingdate+char(39)+',@FINYEARSTART='+char(39)+@Startingdate+ char(39)
+--	--set @Sql='exec CP_STOCKSUMMARY4  '+ @ccname
+	
+--	--print(' au')
+--	--END
+--	--print('not au')
+--	--IF @ShortName ='NIZAM'
+--	--BEGIN
+--	--set @Sql='exec CP_STOCKSUMMARY3  @STORECODE='+char(39)+ @storecode +char(39)+',@FROMDATE='+char(39)+@Startingdate+ char(39)+',@TODATE='+char(39)+@endingdate+char(39)+',@FINYEARSTART='+char(39)+@Startingdate+ char(39)
+--	--print(' niz')
+--	--END
+--	--	print('not niz')
+--	--IF (@ShortName <>'AU') or (@ShortName <>'NIZAM')
+--	--BEGIN
+--	--set @Sql='exec CP_STOCKSUMMARY3  @STORECODE='+char(39)+ @storecode +char(39)+',@FROMDATE='+char(39)+@Startingdate+ char(39)+',@TODATE='+char(39)+@endingdate+char(39)+',@FINYEARSTART='+char(39)+@Startingdate+ char(39)+',@TODAT='+char(39)+@endingdate+char(39)
+--	--END
+--	Print (@Sql)
+--	Exec (@Sql)
+--	IF @ShortName ='AU'
+--	BEGIN
+--	set @Sql='update ' + @datafile + '..inventoryitemmaster set opstock=a.clsqty,opvalue=a.clsval from ' + @Datafile_PrevYear +'..STOCKSUMMARY a where  a.itemcode=' + @datafile + '..inventoryitemmaster.itemcode'
+--	END 
+--	IF @ShortName <>'AU'
+--	BEGIN
+--	set @Sql='update ' + @datafile + '..inventoryitemmaster set opstock=a.clsqty,opvalue=a.clsval from ' + @Datafile_PrevYear +'..STOCKSUMMARY a where a.storecode=' + @datafile + '..inventoryitemmaster.storecode and a.itemcode=' + @datafile + '..inventoryitemmaster.itemcode'
+--	END 
+--	Print (@Sql)
+--	Exec (@Sql)
+--	Fetch abc into @storecode
+--	End
+--	CLOSE abc
+--	DEALLOCATE abc
+--end 
+--Set @Sql = 'Use ' + @Datafile_PrevYear
+--Print (@Sql)
+--        Exec (@Sql)
+-- If not Exists(select * from sysobjects where type='P' and name='CP_STOCKSUMMARY4')
+-- begin
+-- If Exists(select * from sysobjects where type='P' and name='CP_STOCKSUMMARY3')
+-- begin
+--	DECLARE abc CURSOR FOR select storecode FROM STOREMASTER WHERE STORECODE IN(SELECT STORECODE FROM INVENTORYITEMMASTER)
+--	open abc
+--	Fetch abc into @storecode
+--	while @@fetch_Status=0
+--	Begin
+--	set @Sql='UPDATE ' + @Datafile_PrevYear + '..inventoryitemmaster SET SELECTOPT='+char(39)+'N'+char(39)
+--	Print (@Sql)
+--	Exec (@Sql)
+--	set @Sql='UPDATE ' + @Datafile_PrevYear + '..inventoryitemmaster SET SELECTOPT='+char(39)+'Y'+char(39)
+--	Print (@Sql)
+--	Exec (@Sql)
+--	--set @Sql='exec CP_STOCKSUMMARY3  @STORECODE='+char(39)+ @storecode +char(39)+',@FROMDATE='+char(39)+@Startingdate+ char(39)+',@TODATE='+char(39)+@endingdate+char(39)+',@FINYEARSTART='+char(39)+@Startingdate+ char(39)+',@TODAT='+char(39)+@endingdate+char(39)
+--	--Print (@Sql)
+--	--Exec (@Sql)
+--	--set @Sql='update ' + @datafile + '..inventoryitemmaster set opstock=a.clsqty,opvalue=a.clsval from ' + @Datafile_PrevYear +'..STOCKSUMMARY a where a.storecode=' + @datafile + '..inventoryitemmaster.storecode and a.itemcode=' + @datafile + '..inventoryitemmaster.itemcode'
+--	----select * from inventoryitemmaster
+--	--Print (@Sql)
+--	--Exec (@Sql)
+--	Print (@ShortName)
+--	 --IF @ShortName ='AU'
+--	--BEGIN
+--	set @ccname=''
+--	set @ssql='select a.name from '+@Datafile_PrevYear+'..syscolumns a,'+@Datafile_PrevYear+'..sysobjects b where b.xtype='+CHAR(39)+'p'+CHAR(39)+' and a.id=b.id and b.name='+char(39)+'CP_STOCKSUMMARY3'+char(39)+' and UPPER(A.NAME) not in (select c.name from '+@Datafile_PrevYear+'..syscolumns c,'+@Datafile_PrevYear+'..sysobjects d where d.xtype='+char(39)+'p'+char(39)+' and c.id=d.id AND ISNULL(c.AUTOVAL,0)=0  AND ISNULL(COLSTAT,0)=1 group by c.name)'
+--	print (@ssql)
+--	set @TSql='DECLARE posjv CURSOR FOR ' + @ssql
+--	print (@TSql)
+--	exec (@TSQL)
+--	Open POSJV
+--	Fetch POSJV InTo @cname
+--	While (@@Fetch_Status=0)
+--	Begin 
+--	if @cname='@STORECODE' 
+--	begin
+--	Set @ccname=@ccname+@cname+'='+char(39)+ @storecode +char(39)+','
+--	end 
+--	if @cname='@FROMDATE' 
+--	begin
+--	Set @ccname=@ccname+@cname+'='+char(39)+ @Startingdate +char(39)+','
+--	end  
+--	if @cname='@TODATE' 
+--	begin
+--	Set @ccname=@ccname+@cname+'='+char(39)+ @endingdate +char(39)+','
+--	end  
+--	if @cname='@FINYEARSTART' 
+--	begin
+--	Set @ccname=@ccname+@cname+'='+char(39)+ @Startingdate +char(39)+','
+--	end 
+--	if @cname='@TODAT' 
+--	begin
+--	Set @ccname=@ccname+@cname+'='+char(39)+ @endingdate +char(39)+','
+--	end 
+--	--Set @ccname=@ccname+@cname+','
+--	Fetch POSJV InTo @cname
+--	End
+--	if len(@ccname)>1
+--	Begin
+--		set @ccname=substring(@ccname,1,len(@ccname)-1)
+--	End
+--	Close PosJv
+--	DeAllocate PosJv
+--	Set @Sql = 'Use ' + @Datafile_PrevYear
+--Print (@Sql)
+--        Exec (@Sql)
+--	--set @Sql='exec CP_STOCKSUMMARY3  @FROMDATE='+char(39)+@Startingdate+ char(39)+',@TODATE='+char(39)+@endingdate+char(39)+',@FINYEARSTART='+char(39)+@Startingdate+ char(39)
+--	set @Sql='exec CP_STOCKSUMMARY3  '+ @ccname
+	
+--	Print (@Sql)
+--	Exec (@Sql)
+--	IF @ShortName ='AU'
+--	BEGIN
+--	set @Sql='update ' + @datafile + '..inventoryitemmaster set opstock=a.clsqty,opvalue=a.clsval from ' + @Datafile_PrevYear +'..STOCKSUMMARY a where  a.itemcode=' + @datafile + '..inventoryitemmaster.itemcode'
+--	END 
+--	IF @ShortName <>'AU'
+--	BEGIN
+--	set @Sql='update ' + @datafile + '..inventoryitemmaster set opstock=a.clsqty,opvalue=a.clsval from ' + @Datafile_PrevYear +'..STOCKSUMMARY a where a.storecode=' + @datafile + '..inventoryitemmaster.storecode and a.itemcode=' + @datafile + '..inventoryitemmaster.itemcode'
+--	END 
+--	Print (@Sql)
+--	Exec (@Sql)
+--	Fetch abc into @storecode
+--	End
+--	CLOSE abc
+--	DEALLOCATE abc
+--end 
+--end
+--If NOT Exists(select * from sysobjects where type='P' and name='CP_STOCKSUMMARY4')
+--begin
+--If NOT Exists(select * from sysobjects where type='P' and name='CP_STOCKSUMMARY3')
+--begin
+--If Exists(select * from sysobjects where type='P' and name='CP_STOCKSUMMARY2')
+-- begin
+-- DECLARE abc CURSOR FOR select storecode FROM STOREMASTER WHERE STORECODE IN(SELECT STORECODE FROM INVENTORYITEMMASTER)
+--	open abc
+--	Fetch abc into @storecode
+--	while @@fetch_Status=0
+--	Begin
+--	set @Sql='UPDATE ' + @datafile + '..inventoryitemmaster SET SELECTOPT='+char(39)+'N'+char(39)
+--	Print (@Sql)
+--	Exec (@Sql)
+--	set @Sql='UPDATE ' + @datafile + '..inventoryitemmaster SET SELECTOPT='+char(39)+'Y'+char(39)
+--	Print (@Sql)
+--	Exec (@Sql)
+--	set @Sql='exec CP_STOCKSUMMARY2  @STORECODE='+char(39)+ @storecode +char(39)+',@FROMDATE='+char(39)+@Startingdate+ char(39)+',@TODATE='+char(39)+@endingdate+char(39)+',@FINYEARSTART='+char(39)+@Startingdate+ char(39)
+--	Print (@Sql)
+--	--Exec (@Sql)
+--	set @Sql='update ' + @datafile + '..inventoryitemmaster set opstock=a.CLOSINGSTOCK,opvalue=a.CLOSINGVALUE from ' + @datafile +'..tEMP_cLStock a where a.storecode=' + @datafile + '..inventoryitemmaster.storecode and a.itemcode=' + @datafile + '..inventoryitemmaster.itemcode'
+--	--select * from inventoryitemmaster   WHERE ITEMCODE='10619' 
+--	--SELECT * FROM CSC1819..tEMP_cLStock   WHERE ITEMCODE='10619' 
+
+--	Print (@Sql)
+--	Exec (@Sql)
+--	Fetch abc into @storecode
+--	End
+--	CLOSE abc
+--	DEALLOCATE abc
+-- end 
+-- END 
+-- enD
