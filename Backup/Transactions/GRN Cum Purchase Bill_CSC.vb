@@ -5896,7 +5896,7 @@ Public Class GRN_Cum_Purchase_Bill_CSC
             If gdataset.Tables("GrnHdr").Rows.Count > 0 Then
                 Txt_PONo.Text = Trim(gdataset.Tables("GrnHdr").Rows(0).Item("pono"))
                 txt_Grnno.Text = Trim(gdataset.Tables("GrnHdr").Rows(0).Item("grndetails"))
-                Call txt_Grnno_Validated(cmd_PONOhelp, e)
+                '                Call txt_Grnno_Validated(cmd_PONOhelp, e)
                 txt_Grnno.Focus()
             Else
                 Call Txt_PONo_Validated(Txt_PONo.Text, e)
@@ -5941,7 +5941,7 @@ Public Class GRN_Cum_Purchase_Bill_CSC
         gconnection.getDataSet(strsql, "grnhdrchk")
         If gdataset.Tables("grnhdrchk").Rows.Count > 0 Then
             Me.txt_Grnno.Text = Trim(gdataset.Tables("grnhdrchk").Rows(0).Item("grndetails"))
-            Call txt_Grnno_Validated(sender, e)
+            '            Call txt_Grnno_Validated(sender, e)
             txt_Grnno.Focus()
         ElseIf Trim(Txt_PONo.Text) <> "" Then
             strsql = "SELECT * FROM PO_HDR WHERE pono='" & Trim(Txt_PONo.Text) & "'"

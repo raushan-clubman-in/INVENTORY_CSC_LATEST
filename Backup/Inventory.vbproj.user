@@ -1,7 +1,7 @@
 <VisualStudioProject>
     <VisualBasic LastOpenVersion = "7.10.3077" >
         <Build>
-            <Settings ReferencePath = "F:\Office\DDL\;D:\dbs\PANKAJ\INVENTORY_gym\INVENTORY_sc\bin\;E:\WORKINGSOURCE\RAUSHAN\SOURCECHS\csc\INVENTORY_CSC\Backup\bin\;E:\CHS\SOURCE\Inventory\CSC\rau\INVENTORY_CSC\Backup\bin\" >
+            <Settings ReferencePath = "F:\Office\DDL\;D:\dbs\PANKAJ\INVENTORY_gym\INVENTORY_sc\bin\;E:\WORKINGSOURCE\RAUSHAN\SOURCECHS\csc\INVENTORY_CSC\Backup\bin\;E:\CHS\SOURCE\Inventory\CSC\rau\INVENTORY_CSC\Backup\bin\;D:\CHS\GITHUB\INVENTORY_CSC_LATEST\Backup\bin\" >
                 <Config
                     Name = "Debug"
                     EnableASPDebugging = "false"

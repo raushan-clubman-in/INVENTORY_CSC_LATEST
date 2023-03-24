@@ -172,6 +172,14 @@
                     AssemblyName = "AxInterop.MSFlexGridLib"
                     HintPath = "bin\AxInterop.MSFlexGridLib.dll"
                 />
+                <Reference
+                    Name = "MSDATASRC2"
+                    Guid = "{7C0FFAB0-CD84-11D0-949A-00A0C91110ED}"
+                    VersionMajor = "1"
+                    VersionMinor = "0"
+                    Lcid = "0"
+                    WrapperTool = "tlbimp"
+                />
             </References>
             <Imports>
                 <Import Namespace = "Microsoft.VisualBasic" />

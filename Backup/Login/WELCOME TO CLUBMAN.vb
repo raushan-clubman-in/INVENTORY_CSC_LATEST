@@ -498,6 +498,7 @@ Public Class Form1
                 gserver = Trim(getserver.Tables(0).Rows(0).Item(0) & "")
                 ggusername = Trim(getserver.Tables(0).Rows(0).Item(1) & "")
                 ggpassword = abcdMINUS(Trim(getserver.Tables(0).Rows(0).Item(2) & ""))
+                'ggpassword = Trim(getserver.Tables(0).Rows(0).Item(2) & "")
                 ggproductkey = abcdMINUS(Trim(getserver.Tables(0).Rows(0).Item(3) & ""))
                 gDatabase = Trim(getserver.Tables(0).Rows(0).Item("DATABASE") & "")
                 SHORTNAME = Trim(getserver.Tables(0).Rows(0).Item("SHORTNAME") & "")
