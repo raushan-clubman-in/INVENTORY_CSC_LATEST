@@ -588,7 +588,7 @@ Public Class Main_MDI
             MkDir(AppPath & "\Reports")
         End If
         '        Call Clearfiles()
-        Call nEWuPDATE()
+        'Call nEWuPDATE()
         Call FillCompanyinfo()
         Call GetAccountcode()
         Call Activateuseradmin()

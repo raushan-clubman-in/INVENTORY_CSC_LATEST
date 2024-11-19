@@ -272,7 +272,7 @@ Public Class frmStockledgermainstock
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
         Me.Label3.Location = New System.Drawing.Point(40, 24)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(94, 18)
+        Me.Label3.Size = New System.Drawing.Size(93, 18)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "FROM DATE :"
         '

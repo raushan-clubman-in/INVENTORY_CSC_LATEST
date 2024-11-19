@@ -268,7 +268,7 @@ Public Class Welcome
         Dim sqlstring As String
         Try
             sqlstring = " SELECT ISNULL(CompanyName,'') AS CompanyName,ISNULL(Fromdate,getdate()) AS Fromdate,ISNULL(Todate,getdate()) AS Todate,ISNULL(Add1,'') AS Add1,ISNULL(Add2,'') AS Add2,"
-            sqlstring = sqlstring & " ISNULL(City,'') AS City,ISNULL(State,'') AS State,ISNULL(Pincode,'') AS Pincode,ISNULL(Datafile,'') AS Datafile FROM ClubMaster "
+            sqlstring = sqlstring & " ISNULL(City,'') AS City,ISNULL(State,'') AS State,ISNULL(Pincode,'') AS Pincode,ISNULL(Datafile,'') AS Datafile FROM Master..ClubMaster where datafile= '" + gDatabase + "'"
             gconnection.getCompanyinfo(sqlstring, "ClubMaster")
             If gdataset.Tables("ClubMaster").Rows.Count > 0 Then
                 MyCompanyName = Trim(CStr(gdataset.Tables("ClubMaster").Rows(0).Item("CompanyName")))
@@ -310,21 +310,25 @@ Public Class Welcome
         If ShowCompany = True Then
             ObjCompanyList.Show()
         Else
-            Dim sqlstring, gFinancialyearStart, gFinancialyearEnding, vCompanyname As String
+            Dim sqlstring, vCompanyname As String
+            Dim gFinancialyearStart, gFinancialyearEnding As Date
             Dim LoopIndex As Integer
 
             SQLSTRING = "SELECT ISNULL(COMPANYNAME,'') AS COMPANYNAME,ISNULL(FROMDATE,GETDATE()) AS FROMDATE,ISNULL(TODATE,GETDATE()) AS TODATE,ISNULL(SHORTNAME,'') AS SHORTNAME,ISNULL(DATAFILE,'') AS DATAFILE, "
             sqlstring = sqlstring & " ISNULL(ADD1,'') AS ADD1,ISNULL(ADD2,'') AS ADD2,ISNULL(CITY,'') AS CITY,ISNULL(STATE,'') AS STATE,ISNULL(PINCODE,'') AS PINCODE,ISNULL(PHONE1,'') AS PHONE1,ISNULL(FAX,'') AS FAX FROM CLUBMASTER WHERE DATAFILE = '" & gDatabase & "' AND ISNULL(ACTIVE,'')='Y' ORDER BY SNO"
-            gconnection.getCompanyinfo(SQLSTRING, "CLUBMASTER")
+
+            gconnection.getCompanyinfo(sqlstring, "CLUBMASTER")
             If gdataset.Tables("CLUBMASTER").Rows.Count > 0 Then
                 For LoopIndex = 0 To gdataset.Tables("CLUBMASTER").Rows.Count - 1
                     With gdataset.Tables("CLUBMASTER").Rows(LoopIndex)
                         gCompanyname = Trim(.Item("COMPANYNAME"))
                         gFinancialyearStart = Format(CDate(.Item("FROMDATE")), "dd/MM/yyyy")
-                        gFinancialyearEnding = Format(CDate(.Item("TODATE")), "dd/MM/yyyy")
-                        gFinancalyearStart = Year(gFinancialyearStart)
-                        gFinancialyearEnd = Year(gFinancialyearEnding)
-                        gFinancialyearEnd = Year(gFinancialyearEnding)
+                        'gFinancialyearEnding = Format(CDate(.Item("TODATE")), "dd/MM/yyyy")
+                        gFinancialyearEnding = DateAdd(DateInterval.Year, 1, gFinancialyearStart)
+
+                        gFinancalyearStart = Year(CDate(gFinancialyearStart))
+                        gFinancialyearEnd = Year(CDate(gFinancialyearEnding))
+                        gFinancialyearEnd = Year(CDate(gFinancialyearEnding))
                         gDatabase = Trim(CStr(.Item("DATAFILE")))
                     End With
                 Next LoopIndex

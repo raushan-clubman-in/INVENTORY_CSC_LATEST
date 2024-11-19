@@ -352,11 +352,16 @@ Friend Class CompanyList1
 
         If Trim(fgrdCompanyList.get_TextMatrix(fgrdCompanyList.Row, 0)) <> "" Then
             gCompanyname = Trim(fgrdCompanyList.get_TextMatrix(fgrdCompanyList.Row, 0))
+
             gFinancialyearStart = Format(CDate(fgrdCompanyList.get_TextMatrix(fgrdCompanyList.Row, 1)), "dd/MM/yyyy")
-            gFinancialyearEnding = Format(CDate(fgrdCompanyList.get_TextMatrix(fgrdCompanyList.Row, 2)), "dd/MM/yyyy")
-            gFinancalyearStart = Year(gFinancialyearStart)
-            gFinancialyearEnd = Year(gFinancialyearEnding)
-            gFinancialyearEnd = Year(gFinancialyearEnding)
+            '            gFinancialyearEnding = Format(CDate(fgrdCompanyList.get_TextMatrix(fgrdCompanyList.Row, 2)), "dd/MM/yyyy")
+
+
+            gFinancialyearEnding = DateAdd(DateInterval.Year, 1, gFinancialyearStart)
+
+            gFinancalyearStart = Year(CDate(gFinancialyearStart))
+            gFinancialyearEnd = Year(CDate(gFinancialyearEnding))
+            gFinancialyearEnd = Year(CDate(gFinancialyearEnding))
             gDatabase = Trim(fgrdCompanyList.get_TextMatrix(fgrdCompanyList.Row, 7))
             vCompanyname = Trim(fgrdCompanyList.get_TextMatrix(fgrdCompanyList.Row, 0))
             Me.Hide()

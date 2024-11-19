@@ -5879,8 +5879,8 @@ Public Class GRN_Cum_Purchase_Bill_CSC
     End Sub
 
     Private Sub cmd_PONOhelp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmd_PONOhelp.Click
-        gSQLString = "SELECT ISNULL(pono,'') AS PONO,ISNULL(podate,'')AS PODATE,ISNULL(podepartment,'') AS PODEPARTMENT FROM PO_HDR"
-        M_WhereCondition = " WHERE FREEZE <> 'Y' "
+        gSQLString = "SELECT ISNULL(pono,'') AS PONO,ISNULL(podate,'')AS PODATE,ISNULL(podepartment,'') AS PODEPARTMENT FROM VIEW_PO_HDR"
+        M_WhereCondition = " WHERE FREEZE <> 'Y' AND ISNULL(pono,'') in (Select pono from [View_PO_Pending])"
         Dim vform As New List_Operation
         vform.Field = "PONO,PODATE,PODEPARTMENT"
         vform.vFormatstring = "         PONO    |        PODATE         |        PODEPARTMENT                   "
@@ -5937,14 +5937,14 @@ Public Class GRN_Cum_Purchase_Bill_CSC
             'GetRights()
         End If
 
-        strsql = " select * from grn_header where pono = '" & Trim(Me.Txt_PONo.Text) & "' "
+        strsql = " select * from View_grn_header where pono = '" & Trim(Me.Txt_PONo.Text) & "' "
         gconnection.getDataSet(strsql, "grnhdrchk")
         If gdataset.Tables("grnhdrchk").Rows.Count > 0 Then
             Me.txt_Grnno.Text = Trim(gdataset.Tables("grnhdrchk").Rows(0).Item("grndetails"))
             '            Call txt_Grnno_Validated(sender, e)
             txt_Grnno.Focus()
         ElseIf Trim(Txt_PONo.Text) <> "" Then
-            strsql = "SELECT * FROM PO_HDR WHERE pono='" & Trim(Txt_PONo.Text) & "'"
+            strsql = "SELECT * FROM VIEW_PO_HDR WHERE pono='" & Trim(Txt_PONo.Text) & "'"
             strsql = strsql & " AND FREEZE <> 'Y' "
             gconnection.getDataSet(strsql, "PO_HDR")
             If gdataset.Tables("PO_HDR").Rows.Count > 0 Then
@@ -5986,7 +5986,7 @@ Public Class GRN_Cum_Purchase_Bill_CSC
                 'Me.Cmd_Add.Text = "Update[F7]"
 
                 '----------------------ITEMDETAILS RETRIEVE----------------------------
-                strsql = "SELECT * FROM PO_ITEMDETAILS WHERE pono='" & Trim(Txt_PONo.Text) & "' ORDER BY AUTOID "
+                strsql = "SELECT * FROM VIEW_PO_ITEMDETAILS a WHERE a.pono='" & Trim(Txt_PONo.Text) & "' and itemcode not in (select itemcode from View_Grn_details c where a.pono=c.pono) ORDER BY AUTOID"
                 gconnection.getDataSet(strsql, "PO_ITEMDETAILS")
                 If gdataset.Tables("PO_ITEMDETAILS").Rows.Count > 0 Then
                     Dim count, temp, tcode As String

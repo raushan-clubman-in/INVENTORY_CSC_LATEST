@@ -1,0 +1,89 @@
+
+                                        PRINTED ON : 13/05/2023
+
+CSC                                                                                                                                    
+ADD1                           STORE MASTER                                                                   
+ADD2                           ------------                  
+                                                                      PAGE : 1  
+--------------------------------------------------------------------------------
+|STORECODE      |STORE DESCRIPTION                       |    STATUS|    FREEZE|
+--------------------------------------------------------------------------------
+
+|01             |BAR-1                                   |         S|         N|
+|02             |BAR-2                                   |         S|         N|
+|03             |BAR-3                                   |         S|         N|
+|04             |BAR-4                                   |         S|         N|
+|05             |OFFICE (SUBSTORE)                       |         S|         N|
+|06             |HOUSEKEEPING                            |         M|         N|
+|07             |MAINTENANCE                             |         M|         N|
+|08             |EVENT                                   |         M|         N|
+|09             |ACCOUNTS                                |         M|         N|
+|10             |IT                                      |         M|         N|
+|11             |SPORTS                                  |         M|         N|
+|12             |MAINTENANCE (SUBSTORE)                  |         S|         N|
+|19             |FOOD COURT                              |         S|         N|
+|20             |GARDEN                                  |         S|         N|
+|21             |EVENT (SUBSTORE)                        |         S|         N|
+|22             |PRESIDENT ROOM (SUBSTORE)               |         S|         N|
+|78             |RETAIL COUNTER                          |         S|         N|
+|AMBER          |AMBER KITCHEN                           |         S|         N|
+|AS0001         |ACCOUNTS STORE ROOM                     |         S|         N|
+|BADMINTON      |BADMONTON COURT                         |         S|         N|
+|BANQ           |BANQUET HALL                            |         S|         N|
+|BILLIARD       |BILLIARD ROOM (S/S)                     |         S|         N|
+|CARD           |CARD ROOM                               |         S|         N|
+|CHINESE        |CHINESE KITCHEN                         |         S|         N|
+|COMM           |COMMITTEE ROOM                          |         S|         N|
+|COMP           |COMPUTER ROOM                           |         M|         N|
+|DIN            |DINNING HALL                            |         S|         N|
+|E1             |EVENT                                   |         M|         N|
+|E2             |EVENT (SUBSTORE)                        |         S|         N|
+|FB1            |FOOD & BEVE (SUB STORE)                 |         S|         N|
+|GAME           |GAMES ROOM                              |         S|         N|
+|GR101          |GUEST ROOM101                           |         S|         N|
+|GR102          |GUEST ROOM102                           |         S|         N|
+|GR103          |GUEST ROOM103                           |         S|         N|
+|GR104          |GUEST ROOM104                           |         S|         N|
+|GR105          |GUEST ROOM105                           |         S|         N|
+|GR106          |GUEST ROOM106                           |         S|         N|
+|GR107          |GUEST ROOM107                           |         S|         N|
+|GR108          |GUEST ROOM108                           |         S|         N|
+|GRD            |GARDEN AREA (S/S)                       |         S|         N|
+|GSM            |GENERAL MAINTENANCE                     |         S|         N|
+|H1             |HEALTH PARLOUR                          |         M|         N|
+|H2             |LADIES DRESSING ROOM                    |         S|         N|
+|H3             |GENTS DRESSING ROOM                     |         S|         N|
+|H4             |SWEEPER                                 |         S|         N|
+|H5             |FOOD AND BEVERAGES                      |         M|         N|
+|H6             |ROOM DIVISION                           |         M|         N|
+|H7             |OFFICE                                  |         M|         N|
+|H9             |HEALTH PARLOUR(SUBSTORE)                |         S|         N|
+--------------------------------------------------------------------------------
+                                        PRINTED ON : 13/05/2023
+
+CSC                                                                                                                                    
+ADD1                           STORE MASTER                                                                   
+ADD2                           ------------                  
+                                                                      PAGE : 2  
+--------------------------------------------------------------------------------
+|STORECODE      |STORE DESCRIPTION                       |    STATUS|    FREEZE|
+--------------------------------------------------------------------------------
+
+|HK1            |HOUSEKEEPING (SUB STORE)                |         S|         N|
+|IN&OUTPOOL     |INDOOR & OUTDOOR POOL                   |         S|         N|
+|INOUT          |IN & OUT GATE                           |         S|         N|
+|IT1            |IT (SUBSTORE)                           |         S|         N|
+|KITCHEN        |KITCHEN COUNTER                         |         S|         N|
+|LOUNGE         |LOUNGE ROOM                             |         S|         N|
+|MNS            |MAIN STORE                              |         M|         N|
+|POR            |PORCH / PORTICO                         |         S|         N|
+|RD             |ROOM DIVISION                           |         S|         N|
+|RECEP          |RECEPTION AREA                          |         S|         N|
+|S.QUART        |STAFF QUARTER                           |         S|         N|
+|SAL            |SALOON                                  |         S|         N|
+|SECY           |SECRETARY ROOM                          |         S|         N|
+|T01            |TEMPORARY BAR 1                         |         S|         N|
+|T02            |TEMPORARY BAR 2                         |         S|         N|
+|T03            |TEMPORARY BAR 3                         |         S|         N|
+--------------------------------------------------------------------------------
+

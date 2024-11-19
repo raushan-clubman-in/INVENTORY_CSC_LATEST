@@ -78,6 +78,7 @@ Public Class frmStockSummary
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Chklist_Company As System.Windows.Forms.CheckedListBox
     Friend WithEvents Select_AllComp As System.Windows.Forms.CheckBox
+    Friend WithEvents Cmd_Excel As System.Windows.Forms.Button
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.Resources.ResourceManager = New System.Resources.ResourceManager(GetType(frmStockSummary))
@@ -99,6 +100,7 @@ Public Class frmStockSummary
         Me.Cmd_Exit = New System.Windows.Forms.Button
         Me.Cmd_Clear = New System.Windows.Forms.Button
         Me.frmbut = New System.Windows.Forms.GroupBox
+        Me.Cmd_Excel = New System.Windows.Forms.Button
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.grp_SalebillChecklist = New System.Windows.Forms.GroupBox
         Me.lbl_Wait = New System.Windows.Forms.Label
@@ -129,6 +131,7 @@ Public Class frmStockSummary
         Me.Select_AllComp = New System.Windows.Forms.CheckBox
         Me.Chklist_Company = New System.Windows.Forms.CheckedListBox
         Me.GroupBox3.SuspendLayout()
+        Me.frmbut.SuspendLayout()
         Me.grp_SalebillChecklist.SuspendLayout()
         Me.grp_orderby.SuspendLayout()
         Me.SuspendLayout()
@@ -274,7 +277,7 @@ Public Class frmStockSummary
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
         Me.Label3.Location = New System.Drawing.Point(16, 27)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(94, 18)
+        Me.Label3.Size = New System.Drawing.Size(93, 18)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "FROM DATE :"
         '
@@ -285,7 +288,7 @@ Public Class frmStockSummary
         Me.Cmd_Print.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Cmd_Print.ForeColor = System.Drawing.Color.White
         Me.Cmd_Print.Image = CType(resources.GetObject("Cmd_Print.Image"), System.Drawing.Image)
-        Me.Cmd_Print.Location = New System.Drawing.Point(512, 624)
+        Me.Cmd_Print.Location = New System.Drawing.Point(445, 13)
         Me.Cmd_Print.Name = "Cmd_Print"
         Me.Cmd_Print.Size = New System.Drawing.Size(104, 32)
         Me.Cmd_Print.TabIndex = 445
@@ -298,7 +301,7 @@ Public Class frmStockSummary
         Me.Cmd_View.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Cmd_View.ForeColor = System.Drawing.Color.White
         Me.Cmd_View.Image = CType(resources.GetObject("Cmd_View.Image"), System.Drawing.Image)
-        Me.Cmd_View.Location = New System.Drawing.Point(368, 624)
+        Me.Cmd_View.Location = New System.Drawing.Point(303, 624)
         Me.Cmd_View.Name = "Cmd_View"
         Me.Cmd_View.Size = New System.Drawing.Size(104, 32)
         Me.Cmd_View.TabIndex = 442
@@ -311,7 +314,7 @@ Public Class frmStockSummary
         Me.Cmd_Exit.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Cmd_Exit.ForeColor = System.Drawing.Color.White
         Me.Cmd_Exit.Image = CType(resources.GetObject("Cmd_Exit.Image"), System.Drawing.Image)
-        Me.Cmd_Exit.Location = New System.Drawing.Point(664, 624)
+        Me.Cmd_Exit.Location = New System.Drawing.Point(725, 624)
         Me.Cmd_Exit.Name = "Cmd_Exit"
         Me.Cmd_Exit.Size = New System.Drawing.Size(104, 32)
         Me.Cmd_Exit.TabIndex = 443
@@ -324,7 +327,7 @@ Public Class frmStockSummary
         Me.Cmd_Clear.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Cmd_Clear.ForeColor = System.Drawing.Color.White
         Me.Cmd_Clear.Image = CType(resources.GetObject("Cmd_Clear.Image"), System.Drawing.Image)
-        Me.Cmd_Clear.Location = New System.Drawing.Point(224, 624)
+        Me.Cmd_Clear.Location = New System.Drawing.Point(159, 624)
         Me.Cmd_Clear.Name = "Cmd_Clear"
         Me.Cmd_Clear.Size = New System.Drawing.Size(104, 32)
         Me.Cmd_Clear.TabIndex = 441
@@ -333,11 +336,27 @@ Public Class frmStockSummary
         'frmbut
         '
         Me.frmbut.BackColor = System.Drawing.Color.Transparent
+        Me.frmbut.Controls.Add(Me.Cmd_Excel)
+        Me.frmbut.Controls.Add(Me.Cmd_Print)
         Me.frmbut.Location = New System.Drawing.Point(136, 608)
         Me.frmbut.Name = "frmbut"
         Me.frmbut.Size = New System.Drawing.Size(712, 56)
         Me.frmbut.TabIndex = 444
         Me.frmbut.TabStop = False
+        '
+        'Cmd_Excel
+        '
+        Me.Cmd_Excel.BackColor = System.Drawing.Color.ForestGreen
+        Me.Cmd_Excel.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Cmd_Excel.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Cmd_Excel.ForeColor = System.Drawing.Color.White
+        Me.Cmd_Excel.Image = CType(resources.GetObject("Cmd_Excel.Image"), System.Drawing.Image)
+        Me.Cmd_Excel.Location = New System.Drawing.Point(304, 13)
+        Me.Cmd_Excel.Name = "Cmd_Excel"
+        Me.Cmd_Excel.Size = New System.Drawing.Size(104, 32)
+        Me.Cmd_Excel.TabIndex = 446
+        Me.Cmd_Excel.Text = "Excel [F12]"
+        Me.Cmd_Excel.Visible = False
         '
         'Timer1
         '
@@ -503,7 +522,7 @@ Public Class frmStockSummary
         Me.Lbl_SubledgerCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Lbl_SubledgerCode.Location = New System.Drawing.Point(144, 520)
         Me.Lbl_SubledgerCode.Name = "Lbl_SubledgerCode"
-        Me.Lbl_SubledgerCode.Size = New System.Drawing.Size(90, 18)
+        Me.Lbl_SubledgerCode.Size = New System.Drawing.Size(89, 18)
         Me.Lbl_SubledgerCode.TabIndex = 476
         Me.Lbl_SubledgerCode.Text = "ITEM  FROM:"
         '
@@ -662,7 +681,6 @@ Public Class frmStockSummary
         Me.Controls.Add(Me.CHK_ZEROQTY)
         Me.Controls.Add(Me.grp_SalebillChecklist)
         Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.Cmd_Print)
         Me.Controls.Add(Me.Cmd_View)
         Me.Controls.Add(Me.Cmd_Exit)
         Me.Controls.Add(Me.Cmd_Clear)
@@ -679,6 +697,7 @@ Public Class frmStockSummary
         Me.Text = "REPORTS [STOCK SUMMARY]"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.GroupBox3.ResumeLayout(False)
+        Me.frmbut.ResumeLayout(False)
         Me.grp_SalebillChecklist.ResumeLayout(False)
         Me.grp_orderby.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -1566,7 +1585,6 @@ Public Class frmStockSummary
                 rViewer.ssql = sqlstring
                 rViewer.Report = r
                 rViewer.TableName = "STOCKSUMMARY"
-
                 Dim textobj1 As TextObject
                 textobj1 = r.ReportDefinition.ReportObjects("Text13")
                 textobj1.Text = MyCompanyName
@@ -1973,5 +1991,35 @@ Public Class frmStockSummary
             Next
             Select_AllComp.Checked = False
         End If
+    End Sub
+
+    Private Sub Cmd_Excel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cmd_Excel.Click
+        If Me.ProgressBar1.Value > 0 And Me.ProgressBar1.Value < 100 Then
+            Me.ProgressBar1.Value += 1
+            Me.lbl_Wait.Text = Me.ProgressBar1.Value & "%"
+        Else
+            Me.Timer1.Enabled = False
+            Me.ProgressBar1.Value = 0
+            Me.grp_SalebillChecklist.Top = 1000
+            If MsgBox("Click YES for 'Windows View' or NO for 'TEXT View'", MsgBoxStyle.YesNo, "STOCK SUMMARY") = MsgBoxResult.Yes Then
+                If CHK_ITEMMASTSTK.Checked = True Then
+                    Call Item_master_stock_crystal()
+                ElseIf CHK_ABC.Checked = True Then
+                    Call ABC_crystal()
+                ElseIf CHK_VALUE.Checked = True Then
+                    Call StkSummary_crystal()
+                End If
+            Else
+                If CHK_ITEMMASTSTK.Checked = True Then
+                    Call Item_master_stock_crystal1()
+                ElseIf CHK_ABC.Checked = True Then
+                    Call ABC_crystal1()
+                ElseIf CHK_VALUE.Checked = True Then
+                    Call ViewStocksummary()
+                End If
+            End If
+        End If
+
+
     End Sub
 End Class

@@ -1,0 +1,58 @@
+
+                                        PRINTED ON : 08/05/2023
+
+THE GANDHI NAGAR CLUB                                                                                                                  
+NO.73, B.Ramachandra Adithanar STORE MASTER                                                                   
+Gandhinagar, Adyar             ------------                  
+                                                                      PAGE : 1  
+--------------------------------------------------------------------------------
+|STORECODE      |STORE DESCRIPTION                       |    STATUS|    FREEZE|
+--------------------------------------------------------------------------------
+
+|AGM            |ANNUAL GENERAL MEETING                  |         S|         N|
+|BILL           |BILLIARD EXPENSES                       |         S|         N|
+|CFEXP          |CLUB FUNCTION                           |         S|         N|
+|CHI            |CHINESE KITCHEN                         |         S|         N|
+|CHIRS          |CHIRSTMAS CARNIVAL                      |         S|         N|
+|CLEXP          |CLUB EXPENSES                           |         S|         N|
+|COM            |COMPUTER                                |         M|         N|
+|CRD            |CARD ROOM EXPENSES                      |         S|         N|
+|CROC           |CROCKERY CUTTLERY CONSUMED              |         S|         N|
+|CROCK          |CROCKERY & CUTLERY                      |         M|         N|
+|DEV            |DEVELOPMENT                             |         S|         N|
+|ELEEX          |ELECTRICAL EXPENSES                     |         S|         N|
+|ENG            |ENGLISH KITCHEN                         |         S|         N|
+|FAR            |FIXED ASSETS                            |         M|         N|
+|G&T            |GAMES & TOURNAMENT                      |         S|         N|
+|GAN            |GENERATOR EXPENSES                      |         S|         N|
+|GAS            |GAS CONSUMPTION                         |         S|         N|
+|GENEX          |GENERAL EXPENSES                        |         S|         N|
+|GUJ            |GUJARATI                                |         S|         N|
+|GYMEX          |GYM EXPENSES                            |         S|         N|
+|HAW            |HALWAI KITCHEN                          |         S|         N|
+|INDE           |INDEPENDENCE DAY CELEBRATION            |         S|         N|
+|INT            |INTERNATION KITCHEN                     |         S|         N|
+|INTC           |INTERCLUB CHAMPIONSHIP                  |         S|         N|
+|KITEQ          |KITCHEN EQUIPMENT                       |         S|         N|
+|LINE           |LINEN EXPENSES                          |         S|         N|
+|MAIN           |MAINTENANCE  EXPENSES                   |         S|         N|
+|MEMD           |MEMBERS DIRECTORY                       |         S|         N|
+|MGT            |MEMBERS GET TOGETHER                    |         S|         N|
+|MIR            |MIRAGE KITCHEN EXPENSES                 |         S|         N|
+|MNS            |MAIN STORE                              |         M|         N|
+|OTH            |OTHER KITCHEN                           |         S|         N|
+|P&S            |PRINTING & STATIONERY                   |         S|         N|
+|PCK            |PACKING KITCHEN                         |         S|         N|
+|PIZ            |PIZZERIA                                |         S|         N|
+|PTY            |PANTRY                                  |         S|         Y|
+|RWEXP          |ROWING EXPENSES                         |         S|         N|
+|SIL            |SILVER THALI LUNCH/DINNER               |         S|         N|
+|SOI            |SOUTH INDIAN KITCHEN                    |         S|         N|
+|SPL            |SPECIAL KITCHEN                         |         S|         N|
+|SPTC           |SPORTS  COMPLEX                         |         S|         N|
+|STWEL          |STAFF WELFARE                           |         S|         N|
+|SWEXP          |SWIMMING EXPENSES                       |         S|         N|
+|T&R            |TRIAL & RESEARCH                        |         S|         N|
+|UNS            |UNUSABLE STORE                          |         S|         N|
+--------------------------------------------------------------------------------
+

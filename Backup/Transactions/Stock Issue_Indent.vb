@@ -196,7 +196,7 @@ Public Class Stock_Issue_Indent
         Me.lbl_Totalamount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_Totalamount.Location = New System.Drawing.Point(880, 520)
         Me.lbl_Totalamount.Name = "lbl_Totalamount"
-        Me.lbl_Totalamount.Size = New System.Drawing.Size(90, 18)
+        Me.lbl_Totalamount.Size = New System.Drawing.Size(89, 18)
         Me.lbl_Totalamount.TabIndex = 23
         Me.lbl_Totalamount.Text = "TOTAL AMT :"
         Me.lbl_Totalamount.Visible = False
@@ -221,7 +221,7 @@ Public Class Stock_Issue_Indent
         Me.lbl_Remarks.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_Remarks.Location = New System.Drawing.Point(8, 528)
         Me.lbl_Remarks.Name = "lbl_Remarks"
-        Me.lbl_Remarks.Size = New System.Drawing.Size(81, 18)
+        Me.lbl_Remarks.Size = New System.Drawing.Size(80, 18)
         Me.lbl_Remarks.TabIndex = 25
         Me.lbl_Remarks.Text = "REMARKS :"
         '
@@ -277,7 +277,7 @@ Public Class Stock_Issue_Indent
         Me.lbl_Docdate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_Docdate.Location = New System.Drawing.Point(560, 146)
         Me.lbl_Docdate.Name = "lbl_Docdate"
-        Me.lbl_Docdate.Size = New System.Drawing.Size(105, 18)
+        Me.lbl_Docdate.Size = New System.Drawing.Size(104, 18)
         Me.lbl_Docdate.TabIndex = 22
         Me.lbl_Docdate.Text = "INDENT DATE :"
         '
@@ -613,7 +613,7 @@ Public Class Stock_Issue_Indent
         Me.lbl_closingqty.ForeColor = System.Drawing.Color.FromArgb(CType(0, Byte), CType(0, Byte), CType(192, Byte))
         Me.lbl_closingqty.Location = New System.Drawing.Point(24, 496)
         Me.lbl_closingqty.Name = "lbl_closingqty"
-        Me.lbl_closingqty.Size = New System.Drawing.Size(156, 25)
+        Me.lbl_closingqty.Size = New System.Drawing.Size(155, 25)
         Me.lbl_closingqty.TabIndex = 369
         Me.lbl_closingqty.Text = "CLOSING QTY :"
         Me.lbl_closingqty.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -659,7 +659,7 @@ Public Class Stock_Issue_Indent
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(128, 187)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(113, 18)
+        Me.Label1.Size = New System.Drawing.Size(112, 18)
         Me.Label1.TabIndex = 375
         Me.Label1.Text = "ISSUE DOC NO :"
         '
@@ -678,7 +678,7 @@ Public Class Stock_Issue_Indent
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(536, 186)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(129, 18)
+        Me.Label2.Size = New System.Drawing.Size(128, 18)
         Me.Label2.TabIndex = 378
         Me.Label2.Text = "ISSUE DOC DATE :"
         '

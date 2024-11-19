@@ -499,7 +499,7 @@ Public Class Form1
                 ggusername = Trim(getserver.Tables(0).Rows(0).Item(1) & "")
                 ggpassword = abcdMINUS(Trim(getserver.Tables(0).Rows(0).Item(2) & ""))
                 'ggpassword = Trim(getserver.Tables(0).Rows(0).Item(2) & "")
-                ggproductkey = abcdMINUS(Trim(getserver.Tables(0).Rows(0).Item(3) & ""))
+                '                ggproductkey = abcdMINUS(Trim(getserver.Tables(0).Rows(0).Item(3) & ""))
                 gDatabase = Trim(getserver.Tables(0).Rows(0).Item("DATABASE") & "")
                 SHORTNAME = Trim(getserver.Tables(0).Rows(0).Item("SHORTNAME") & "")
                 If Trim(gDatabase) <> "" Then
@@ -507,20 +507,21 @@ Public Class Form1
                 Else
                     ShowCompany = True
                 End If
-                If Trim(ggproductkey) <> Trim(Environment.MachineName) Then
-                    MsgBox("Please Contact Your Software Developers for Reconfigure the Software........")
-                    Call Randomize()
-                    AppPath = Application.StartupPath
-                    vOutfile = Mid("Sys" & (Rnd() * 800000), 1, 8)
-                    VFilePath = AppPath & "\Reports\" & vOutfile & ".txt"
-                    Filewrite = File.AppendText(VFilePath)
 
-                    printfile = VFilePath
-                    Filewrite.WriteLine(abcdADD(Trim(Environment.MachineName)))
-                    '                    Filewrite.WriteLine(abcdADD(Trim(ggusername)))
-                    Filewrite.Close()
-                    End
-                End If
+                'If Trim(ggproductkey) <> Trim(Environment.MachineName) Then
+                '    MsgBox("Please Contact Your Software Developers for Reconfigure the Software........")
+                '    Call Randomize()
+                '    AppPath = Application.StartupPath
+                '    vOutfile = Mid("Sys" & (Rnd() * 800000), 1, 8)
+                '    VFilePath = AppPath & "\Reports\" & vOutfile & ".txt"
+                '    Filewrite = File.AppendText(VFilePath)
+
+                '    printfile = VFilePath
+                '    Filewrite.WriteLine(abcdADD(Trim(Environment.MachineName)))
+                '    '                    Filewrite.WriteLine(abcdADD(Trim(ggusername)))
+                '    Filewrite.Close()
+                '    End
+                'End If
             Else
                 gserver = Environment.MachineName
                 MsgBox("Please Contact Your Software Developers for Reconfigure the Software........")

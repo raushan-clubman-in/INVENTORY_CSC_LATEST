@@ -660,6 +660,7 @@ Public Class frmItemMaterPrinting
             vOutfile = Mid("STK" & (Rnd() * 800000), 1, 8)
             VFilePath = AppPath & "\Reports\" & vOutfile & ".xls"
             ssGrid.ExportToExcel(VFilePath, "ITEMMASTER", AppPath & "\REPORTS\ITEM.log")
+            'ssGrid.ExportToExcel(VFilePath, "ITEMMASTER", VFilePath)
             Shell(strexcelpath & " " & VFilePath, AppWinStyle.MaximizedFocus)
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Export")

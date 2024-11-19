@@ -6,7 +6,31 @@ Inventory
 </name>
 </assembly>
 <members>
-<member name="T:Inventory.Dataset1.VIEWPURCHASEREGISTERSUMMARYDataTable">
+<member name="M:Inventory.Issue_Register.FillGroupdetails">
+******************************  To fill GROUP DETAILS *******************************'''
+
+</member><member name="M:Inventory.Issue_Register.FillStorename">
+******************************  To fill POS details from SupplierName  *******************************'''
+
+</member><member name="M:Inventory.Itemwise_Issue_details.FillStorename">
+******************************  To fill POS details from SupplierName  *******************************'''
+
+</member><member name="M:Inventory.PendingIndent.FillStorename">
+******************************  To fill POS details from SupplierName  *******************************'''
+
+</member><member name="M:Inventory.frmStockreturnreport.FillStorename">
+******************************  To fill POS details from SupplierName  *******************************'''
+
+</member><member name="M:Inventory.Indent_Register.FillGroupdetails">
+******************************  To fill GROUP DETAILS *******************************'''
+
+</member><member name="M:Inventory.Indent_Register.FillStorename">
+******************************  To fill POS details from SupplierName  *******************************'''
+
+</member><member name="M:Inventory.dailyisueDetails.FillStorename">
+******************************  To fill POS details from SupplierName  *******************************'''
+
+</member><member name="T:Inventory.Dataset1.VIEWPURCHASEREGISTERSUMMARYDataTable">
 	<summary>
 Represents the strongly named DataTable class.
 </summary>
@@ -209,31 +233,7 @@ Represents the connection and commands used to retrieve and save data.
 </member><member name="M:Inventory.frmStocktransferreport.FillStorename">
 ******************************  To fill POS details from SupplierName  *******************************'''
 
-</member><member name="M:Inventory.Issue_Register.FillGroupdetails">
-******************************  To fill GROUP DETAILS *******************************'''
-
-</member><member name="M:Inventory.Issue_Register.FillStorename">
-******************************  To fill POS details from SupplierName  *******************************'''
-
 </member><member name="M:Inventory.frmStockadjustmentreport.FillStorename">
-******************************  To fill POS details from SupplierName  *******************************'''
-
-</member><member name="M:Inventory.Indent_Register.FillGroupdetails">
-******************************  To fill GROUP DETAILS *******************************'''
-
-</member><member name="M:Inventory.Indent_Register.FillStorename">
-******************************  To fill POS details from SupplierName  *******************************'''
-
-</member><member name="M:Inventory.Itemwise_Issue_details.FillStorename">
-******************************  To fill POS details from SupplierName  *******************************'''
-
-</member><member name="M:Inventory.PendingIndent.FillStorename">
-******************************  To fill POS details from SupplierName  *******************************'''
-
-</member><member name="M:Inventory.frmStockreturnreport.FillStorename">
-******************************  To fill POS details from SupplierName  *******************************'''
-
-</member><member name="M:Inventory.dailyisueDetails.FillStorename">
 ******************************  To fill POS details from SupplierName  *******************************'''
 
 </member>
